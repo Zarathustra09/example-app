@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EditorController;
+use App\Http\Controllers\MemberController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +22,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware('admin');
+    Route::get('/editor', [EditorController::class, 'index'])->name('editor')->middleware('editor');
+    Route::get('/member', [MemberController::class, 'index'])->name('member')->middleware('member');
