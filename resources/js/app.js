@@ -37,3 +37,13 @@ app.component('example-component', ExampleComponent);
  */
 
 app.mount('#app');
+
+
+
+$(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $('#content').toggleClass('active');
+        $('.item-dashboard, .item-analytics, .item-users, .item-membership, .item-profile, .item-logout').toggleClass('hidden');
+    });
+});

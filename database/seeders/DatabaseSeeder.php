@@ -15,11 +15,13 @@ class DatabaseSeeder extends Seeder
         $users = [
             [
                 'id'             => 1,
-                'name'           => 'Admin',
-                'email'          => 'admin@admin.com',
-                'password'       => '$2y$10$f4aniHIjl5MKap/sLhdyquQIwVzf1uXFleyhjLr1.BNJG7OhReU9C',
+                'name'           => 'Joshua Pardo',
+                'email'          => 'joshua.pardo30@gmail.com',
+                'password'       => '$2y$12$Q4znhmyhqvhhJdDzlW9RgusmM7vESLCmGL5.E6yaM47NZk1KDOLxK',
                 'remember_token' => null,
                 'approved'       => 1,
+                'role'           => 2,
+                
             ],
         ];
 
