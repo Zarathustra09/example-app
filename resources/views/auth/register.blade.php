@@ -60,12 +60,9 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-<<<<<<< HEAD
                         <link rel="stylesheet" href="{{ asset('css/register-style.css') }}">
                             
-=======
 
->>>>>>> ff2ed3648c77da1cba3dd5f5836970223e39fabe
                         {{-- <div class="form-group row mb-3">
                             <label for="registration_form" class="col-md-4 col-form-label text-md-end">{{ __('Registration Form') }}</label>
                     

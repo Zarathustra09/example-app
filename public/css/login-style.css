@@ -7,12 +7,14 @@ body {
 }
 
 .container{
-    width: 1000px; /* Adjust the width as needed */
-    border: 0px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    size: cover;
+    width: 70%; /* Adjust the width as needed */  
+    margin: auto; /* Center the container horizontally */
     
 }
 
-
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        padding: 5px; /* Adjust padding for smaller screens */
+    }
+}
