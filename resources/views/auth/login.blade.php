@@ -12,7 +12,9 @@
                 <p class="alert alert-info">
                     {{ session()->get('message') }}
                 </p>
+               
             @endif
+           
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
@@ -46,7 +48,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                        
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
@@ -70,6 +72,7 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+                                <link rel="stylesheet" href="{{ asset('css/login-style.css') }}">
                             </div>
                         </div>
                     </form>
@@ -78,4 +81,5 @@
         </div>
     </div>
 </div>
+
 @endsection
