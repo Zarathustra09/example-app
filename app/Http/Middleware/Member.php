@@ -17,7 +17,7 @@ class Member
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check()) {
-            return redirect()->route('home');
+            return redirect()->route('login');
         } if (Auth::user()->role == 0) {
             return $next($request);
         } if (Auth::user()->role == 1) {
