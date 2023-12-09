@@ -1,0 +1,7 @@
+body{
+    background-image: url("/img/background.png"); /* Replace with the actual path to your image */
+    background-size: cover; /* Adjust according to your design preferences */
+    background-repeat: no-repeat;
+    /* Add more styles if needed */
+}
+

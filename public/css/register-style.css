@@ -1,0 +1,22 @@
+body {
+    background-image: url('/img/background.png'); /* Replace with the actual path to your image */
+    background-size: cover; /* Adjust according to your design preferences */
+    background-repeat: no-repeat;
+    /* Add more styles if needed */
+
+   
+}
+
+.container{
+   
+    width: 75%; /* Adjust the width as needed */
+    margin: auto;
+    
+}
+
+@media (max-width: 768px) {
+    /* Styles for screens smaller than 768px */
+    .container {
+        padding: 5px; /* Adjust padding for smaller screens */
+    }
+}
