@@ -61,7 +61,7 @@
                             </div>
                         </div>
 
-                        {{-- <div class="form-group row mb-3">
+                        <div class="form-group row mb-3">
                             <label for="registration_form" class="col-md-4 col-form-label text-md-end">{{ __('Registration Form') }}</label>
                     
                             <div class="col-md-6">
@@ -87,7 +87,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div> --}}
+                        </div>
                         
 
                         <div class="row mb-0">

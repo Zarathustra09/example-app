@@ -19,6 +19,11 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('approved')->default(0)->nullable();
             $table->integer('role')->default(0);
+            
+            //images
+            $table->string('registration_form')->nullable();
+            $table->string('proof_of_payment')->nullable();
+    
             $table->rememberToken();
             $table->timestamps();
         });

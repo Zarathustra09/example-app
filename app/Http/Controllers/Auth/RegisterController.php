@@ -54,8 +54,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'registration_form' => ['required', 'file', 'mimes:pdf,jpg,png', 'max:2048'], // Adjust the validation rules for the registration form field
-            'proof_of_payment' => ['required', 'file', 'mimes:pdf,jpg,png', 'max:2048'], // Adjust the validation rules for the proof of payment field
+            'registration_form' => ['required', 'file', 'mimes:pdf,jpg,png', 'max:2048'],
+            'proof_of_payment' => ['required', 'file', 'mimes:pdf,jpg,png', 'max:2048'],
         ]);
     }
 
@@ -65,12 +65,19 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+
+     
     protected function create(array $data)
     {
+        
+
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'registration_form' => $data['registration_form']->store('registration_forms', 'public'),
+             'proof_of_payment' => $data['proof_of_payment']->store('proof_of_payments', 'public'),
         ]);
     }
 

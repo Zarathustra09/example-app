@@ -1,122 +1,126 @@
-<!-- resources/views/layouts/sidebar.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <title>Your Web App</title>
     <style>
+        /* Reset some default styles */
+        body, h1, h2, h3, p, ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Adjustments for a black sidebar that occupies the left side */
         #sidebar {
-            height: 100%;
-            width: 250px;
             position: fixed;
-            z-index: 1;
-            top: 0;
             left: 0;
-            background-color: #111;
-            padding-top: 20px;
-            transition: all 0.3s;
+            top: 0;
+            bottom: 0; /* Occupy the entire height of the screen */
+            z-index: 1000;
+            width: 250px; /* Adjust as needed */
+            background-color: #000; /* Set to black */
+            color: #fff; /* Set text color to white */
+            overflow-y: auto; /* Enable vertical scrolling if content exceeds the height */
+            transition: width 0.3s; /* Smooth transition for width changes */
         }
 
-        #sidebar.active {
-            width: 80px;
-        }
-
-        #sidebar a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 18px;
-            color: #818181;
+        /* Style for the logo image */
+        .logo {
+            width: 80%; /* Adjust as needed */
+            height: auto;
+            border-radius: 50%;
+            cursor: pointer;
+            margin: 10px auto;
             display: block;
-            transition: padding 0.3s;
         }
 
-        #sidebar.active a {
-            padding: 8px;
+        /* Add space between the icons and text */
+        .list-unstyled.components a i {
+            margin-right: 10px;
+            font-size: 1.2rem; /* Adjust the font size for icons */
         }
 
-        .sidebar-header {
-            padding: 16px;
+        /* Style for the list items */
+        .list-unstyled.components li {
+            padding: 10px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            list-style: none; /* Remove the default list item styles */
+        }
+
+        .list-unstyled.components li:hover {
+            background-color: #333; /* Darker background on hover */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow on hover */
+        }
+
+        .list-unstyled.components a {
+            text-decoration: none; /* Remove underline from links */
+            color: #ccc; /* Light gray color for labels */
+            font-size: 1.2rem; /* Adjust the font size for labels */
+            display: flex;
+            align-items: center;
+        }
+
+        /* Add styles for the minimized state */
+        #sidebar.minimized {
+            width: 50px; /* Adjust as needed */
+        }
+
+        #sidebar.minimized .logo {
+            width: 100%; /* Adjust as needed */
             text-align: center;
         }
 
+        #sidebar.minimized .list-unstyled.components {
+            padding: 10px;
+        }
+
+        #sidebar.minimized .list-unstyled.components li {
+            padding: 5px;
+            text-align: center; /* Center align text */
+        }
+
+        #sidebar.minimized .list-unstyled.components a span {
+            display: none; /* Hide the text in the minimized state */
+        }
+
+        #sidebar.minimized .list-unstyled.components a i {
+            margin-right: 5px;
+            font-size: 1.5rem; /* Increase the font size for icons when minimized */
+            margin-bottom: 5px; /* Add bottom padding to icons in minimized state */
+        }
+
+        /* Content adjustment for smaller screens */
         #content {
-            margin-left: 250px;
-            padding: 16px;
-            transition: margin-left 0.3s;
+            margin-left: 250px; /* Adjust as needed */
+            transition: margin-left 0.3s; /* Smooth transition for margin-left changes */
         }
 
-        #content.active {
-            margin-left: 80px;
-        }
-
-        #sidebar.active a {
-            padding: 8px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .item-label {
-            display: inline;
-        }
-
-        .item-icon {
-            display: none;
-        }
-
-        .logo {
-        width: 150px; /* Adjust the width as needed */
-        height: 150px; /* Adjust the height as needed */
-        border-radius: 50%; /* Make the logo image circular */
-        overflow: hidden; /* Ensure the circular shape */
-    }
-     
-
+        /* Responsive design for smaller screens */
         @media (max-width: 768px) {
+            body {
+                margin-left: 0;
+            }
+
             #sidebar {
                 width: 0;
+                display: none;
             }
 
             #content {
                 margin-left: 0;
             }
-
-            .item-dashboard, .item-analytics, .item-users, .item-membership, .item-profile, .item-logout {
-                display: none;
-            }
-            #sidebar.active {
-                width: 250px;
-            }
-
-            #content.active {
-                margin-left: 250px;
-            }
-
-            .item-label {
-                display: none;
-            }
-
-            .item-icon {
-                display: inline;
-            }
         }
     </style>
 </head>
-<body>
-  
+<body class="sidebar-minimized">
+
+    <!-- Sidebar -->
     <nav id="sidebar">
         <div class="sidebar-header">
             <!-- Use the logo as a dropdown toggle -->
             <div class="dropdown">
                 <img src="images\psq_logo.jpg" alt="" class="img-fluid logo dropdown-toggle" id="logoDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="dropdown-menu" aria-labelledby="logoDropdown">
-                    <a class="dropdown-item" href="#">Option 1</a>
-                    <a class="dropdown-item" href="#">Option 2</a>
-                    <a class="dropdown-item" href="#">Option 3</a>
-                </div>
             </div>
         </div>
 
@@ -124,128 +128,65 @@
             <li class="active">
                 <a href="#" class="item-dashboard">
                     <i class="fa-solid fa-house"></i>
-                    Dashboard
+                    <span>Dashboard</span>
                 </a>
             </li>
 
             <li>
                 <a href="#" class="item-analytics">
                     <i class="fas fa-chart-line"></i>
-                    Analytics
+                    <span>Analytics</span>
                 </a>
             </li>
 
             <li>
                 <a href="#" class="item-users">
                     <i class="fas fa-users"></i>
-                    Users
+                    <span>Users</span>
                 </a>
             </li>
 
             <li>
                 <a href="#" class="item-membership">
                     <i class="fas fa-cogs"></i>
-                    Membership 
+                    <span>Membership</span>
                 </a>
             </li>
 
             <li>
                 <a href="#" class="item-profile">
                     <i class="fas fa-user"></i>
-                    Profile
+                    <span>Profile</span>
                 </a>
             </li>
 
             <li>
                 <a href="#" class="item-logout">
                     <i class="fas fa-sign-out-alt"></i>
-                    Logout
+                    <span>Logout</span>
                 </a>
             </li>
         </ul>
-        
     </nav>
 
- <!-- Add this updated script section at the end of your HTML body -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
 
-<script>
-    $(document).ready(function () {
-        // Initial setup for smaller screens
-        if (window.innerWidth <= 768) {
-            $('#sidebar').removeClass('active');
-            $('#content').removeClass('active');
-            $('.item-dashboard, .item-analytics, .item-users, .item-membership, .item-profile, .item-logout').hide();
-            $('.logout-icon').show(); // Show the logout icon
-        }
+    <!-- Add your Bootstrap or other JavaScript frameworks if needed -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        // Logo dropdown toggle
-        $('#logoDropdown').on('click', function () {
-            if (window.innerWidth <= 768) {
-                // For smaller screens, toggle sidebar and show items
-                $('#sidebar').toggleClass('active');
-                $('#content').toggleClass('active');
-                $('.item-dashboard, .item-analytics, .item-users, .item-membership, .item-profile, .item-logout').toggle();
-                $('.logout-icon').toggle();
-            } else {
-                // For larger screens, toggle labels and icons separately
-                $('.item-label, .item-icon').toggle();
-                $('#sidebar').toggleClass('active');
-                $('#content').toggleClass('active');
-                $('.logout-icon').toggle();
-            }
+    <!-- Your custom JavaScript for sidebar functionality -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const logoDropdown = document.getElementById("logoDropdown");
+            const sidebar = document.getElementById("sidebar");
+
+            logoDropdown.addEventListener("click", function () {
+                sidebar.classList.toggle("minimized");
+            });
         });
-
-        // Sub-items toggle
-        $('#sidebar .item-analytics a').on('click', function (e) {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                $('#analyticsSubItems').collapse('toggle');
-            }
-        });
-
-        $('#sidebar .item-users a').on('click', function (e) {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                $('#usersSubItems').collapse('toggle');
-            }
-        });
-
-        $('#sidebar .item-membership a').on('click', function (e) {
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                $('#membershipSubItems').collapse('toggle');
-            }
-        });
-
-        $('#sidebarCollapse').on('click', function () {
-            // Toggle sidebar without hiding items
-            $('#sidebar').toggleClass('active');
-            $('#content').toggleClass('active');
-            if (window.innerWidth > 768) {
-                // For larger screens, toggle labels, icons, and logout icon separately
-                $('.item-label, .item-icon, .logout-icon').toggle();
-            } else {
-                // For smaller screens, toggle items and logout icon
-                $('.item-dashboard, .item-analytics, .item-users, .item-membership, .item-profile, .item-logout, .logout-icon').toggle();
-            }
-        });
-
-        // Adjust visibility on window resize
-        $(window).on('resize', function () {
-            if (window.innerWidth > 768) {
-                // If the sidebar is expanded on larger screens, hide items and logout icon
-                $('.item-dashboard, .item-analytics, .item-users, .item-membership, .item-profile, .item-logout, .logout-icon').addClass('hidden');
-            } else if (!$('#sidebar').hasClass('active')) {
-                // If the sidebar is minimized on smaller screens, show items and logout icon
-                $('.item-dashboard, .item-analytics, .item-users, .item-membership, .item-profile, .item-logout, .logout-icon').toggle();
-            }
-        });
-    });
-</script> 
-
+    </script>
 
 </body>
 </html>
