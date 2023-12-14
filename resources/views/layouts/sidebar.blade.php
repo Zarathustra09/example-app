@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Web App</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Reset some default styles */
         body, h1, h2, h3, p, ul {
@@ -11,7 +12,7 @@
             padding: 0;
         }
 
-        /* Adjustments for a black sidebar that occupies the left side */
+        /* Adjustments for a sidebar that occupies the left side */
         #sidebar {
             position: fixed;
             left: 0;
@@ -19,8 +20,8 @@
             bottom: 0; /* Occupy the entire height of the screen */
             z-index: 1000;
             width: 250px; /* Adjust as needed */
-            background-color: #000; /* Set to black */
-            color: #fff; /* Set text color to white */
+            background-color: #001f3f; /* Dark blue background */
+            color: #fff; /* White text */
             overflow-y: auto; /* Enable vertical scrolling if content exceeds the height */
             transition: width 0.3s; /* Smooth transition for width changes */
         }
@@ -49,13 +50,13 @@
         }
 
         .list-unstyled.components li:hover {
-            background-color: #333; /* Darker background on hover */
+            background-color: #003366; /* Darker background on hover */
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow on hover */
         }
 
         .list-unstyled.components a {
             text-decoration: none; /* Remove underline from links */
-            color: #ccc; /* Light gray color for labels */
+            color: #ffc107; /* Gold color for labels */
             font-size: 1.2rem; /* Adjust the font size for labels */
             display: flex;
             align-items: center;
@@ -115,14 +116,18 @@
 </head>
 <body class="sidebar-minimized">
 
-    <!-- Sidebar -->
     <nav id="sidebar">
-        <div class="sidebar-header">
-            <!-- Use the logo as a dropdown toggle -->
-            <div class="dropdown">
-                <img src="images\psq_logo.jpg" alt="" class="img-fluid logo dropdown-toggle" id="logoDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            </div>
+         <div class="sidebar-header">
+        <!-- Use the logo as a dropdown toggle -->
+        <div class="dropdown">
+            <img src="images\psq_logo.jpg" alt="" class="img-fluid logo dropdown-toggle" id="logoDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @auth
+                <div style="color: #ffc107; text-align: center; margin-top:20px;margin-bottom:50px;">
+                    {{ Auth::user()->email }}
+                </div>
+            @endauth
         </div>
+    </div>
 
         <ul class="list-unstyled components">
             <li class="active">
@@ -139,12 +144,6 @@
                 </a>
             </li>
 
-            <li>
-                <a href="#" class="item-users">
-                    <i class="fas fa-users"></i>
-                    <span>Users</span>
-                </a>
-            </li>
 
             <li>
                 <a href="#" class="item-membership">
@@ -169,21 +168,17 @@
         </ul>
     </nav>
 
-  
+    
 
-    <!-- Add your Bootstrap or other JavaScript frameworks if needed -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- Your custom JavaScript for sidebar functionality -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const logoDropdown = document.getElementById("logoDropdown");
-            const sidebar = document.getElementById("sidebar");
-
-            logoDropdown.addEventListener("click", function () {
-                sidebar.classList.toggle("minimized");
+        $(document).ready(function () {
+            $('[data-toggle="sidebar"]').click(function () {
+                $('#sidebar').toggleClass('minimized');
+                $('#content').toggleClass('minimized-content');
             });
         });
     </script>

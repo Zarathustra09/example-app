@@ -22,14 +22,13 @@ Route::get('/', function () {
 Auth::routes();
 
 //need to fix 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+    Route::get('/home', [HomeController::class, 'index'])->name('index');
    
     Route::get('/editor', [EditorController::class, 'index'])->name('editor')->middleware('editor');
     Route::get('/member', [MemberController::class, 'index'])->name('member')->middleware('member');
 
-    
-    Route::get('/admin', [AdminController::class, 'showAdminDashboard'])->name('admin.dashboard');
-    Route::get('/admin/approve-user/{userId}', [AdminController::class, 'approveUser']);
+    Route::get('/admin', [AdminController::class, 'showAdminDashboard'])->name('admin.dashboard.show');
+    Route::any('/admin/approve-user/{userId}', [AdminController::class, 'approveUser']);
    

@@ -1,71 +1,77 @@
 @extends('layouts.app')
 
 @section('content')
-    
+
+        
             @extends("layouts\sidebar")
+           
+
+           <div id = "content">
             <div class="container">
-                <h2>Admin Dashboard</h2>
+                <h2 class="my-4">Admin Dashboard</h2>
         
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $user)
+                <form action="{{ route('admin.dashboard.show') }}" method="GET" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control" placeholder="Search by name or email" value="{{ request('query') }}">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-secondary">Search</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="thead-light">
                             <tr>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>
-                                    <button class="btn btn-primary" data-toggle="modal" data-target="#userModal{{ $user->id }}">
-                                        View Images
-                                    </button>
-        
-                                    <!-- User Modal -->
-                                    <div class="modal fade" id="userModal{{ $user->id }}" tabindex="-1" role="dialog" aria-labelledby="userModalLabel{{ $user->id }}" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="userModalLabel{{ $user->id }}">Images for {{ $user->name }}</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    @if ($user->registration_form)
-                                                        <img src="{{ asset('storage/' . $user->registration_form) }}" alt="Registration Form" width="100">
-                                                    @else
-                                                        No Registration Form
-                                                    @endif
-        
-                                                    @if ($user->proof_of_payment)
-                                                        <img src="{{ asset('storage/' . $user->proof_of_payment) }}" alt="Proof of Payment" width="100">
-                                                    @else
-                                                        No Proof of Payment
-                                                    @endif
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-success" onclick="approveUser({{ $user->id }})">Approve</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Action</th>
                             </tr>
-                        @endforeach
+                            </thead>
+                    <tbody id="approvalTableBody">
+                        @include('partials.approval-table')
                     </tbody>
                 </table>
+
+                    <!-- Pagination -->
+                    @if ($users->total() > 10)
+                        <div class="d-flex justify-content-center">
+                            {{ $users->links() }}
+                        </div>
+                    @endif
+                </div>
             </div>
-        
-            <script>
+           
+            </div>
+    
+            
+            <<script>
                 function approveUser(userId) {
-                    // You can make an AJAX request to update the approval status
-                    // Here, I'm using a simplified approach for demonstration purposes
-                    window.location = '/admin/approve-user/' + userId;
+                    // Make an AJAX request
+                    $.ajax({
+                        type: 'POST',
+                        url: '/admin/approve-user/' + userId,
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                    // Check if the container element exists
+                    var tableContainer = $('#approvalTableBody');
+
+                    if (tableContainer.length) {
+                        // Update the content of the table with the new data
+                        tableContainer.html(response.table_body);
+                    } else {
+                        console.error('Table container not found');
+                    }
+
+                    // Close the modal if you're using one
+                    $('#userModal' + userId).modal('hide');
+                },
+                        error: function(error) {
+                            console.error('Error:', error);
+                        }
+                    });
                 }
             </script>
 @endsection
