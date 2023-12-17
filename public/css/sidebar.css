@@ -1,48 +1,27 @@
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4; /* Background color for the body */
+        /* Reset some default styles */
+        body, h1, h2, h3, p, ul {
             margin: 0;
             padding: 0;
         }
 
+        /* Adjustments for a sidebar that occupies the left side */
         #sidebar {
             position: fixed;
-            top: 0;
             left: 0;
-            height: 100%;
-            width: 50px; /* Initial width when minimized */
-            background-color: #3498db; /* Main sidebar color */
-            color: #ecf0f1; /* Text color */
-            overflow-y: auto;
-            transition: width 0.3s;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+            top: 0;
+            bottom: 0; /* Occupy the entire height of the screen */
+            z-index: 1000;
+            width: 250px; /* Adjust as needed */
+            background-color: #001f3f; /* Dark blue background */
+            color: #fff; /* White text */
+            overflow-y: auto; /* Enable vertical scrolling if content exceeds the height */
+            transition: width 0.3s; /* Smooth transition for width changes */
         }
 
-        #sidebar.minimized {
-            width: 50px; /* Adjust as needed */
-        }
-
-        #sidebar ul.components {
-            padding: 20px;
-            border-bottom: 1px solid #2980b9; /* Border color between logo and items */
-        }
-
-        #sidebar ul li a {
-            padding: 15px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            color: #ecf0f1;
-            display: block;
-            transition: background-color 0.3s;
-        }
-
-        #sidebar ul li a:hover {
-            background-color: #2980b9; /* Darker background on hover */
-        }
-
-        #sidebar .logo {
-            width: 80%;
+        /* Style for the logo image */
+        .logo {
+            width: 80%; /* Adjust as needed */
             height: auto;
             border-radius: 50%;
             cursor: pointer;
@@ -50,17 +29,79 @@
             display: block;
         }
 
+        /* Add space between the icons and text */
+        .list-unstyled.components a i {
+            margin-right: 10px;
+            font-size: 1.2rem; /* Adjust the font size for icons */
+        }
+
+        /* Style for the list items */
+        .list-unstyled.components li {
+            padding: 10px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            list-style: none; /* Remove the default list item styles */
+        }
+
+        .list-unstyled.components li:hover {
+            background-color: #003366; /* Darker background on hover */
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow on hover */
+        }
+
+        .list-unstyled.components a {
+            text-decoration: none; /* Remove underline from links */
+            color: #ffc107; /* Gold color for labels */
+            font-size: 1.2rem; /* Adjust the font size for labels */
+            display: flex;
+            align-items: center;
+        }
+
+        /* Add styles for the minimized state */
+        #sidebar.minimized {
+            width: 50px; /* Adjust as needed */
+        }
+
         #sidebar.minimized .logo {
-            width: 50%;
-            margin: 10px auto;
+            width: 100%; /* Adjust as needed */
+            text-align: center;
         }
 
+        #sidebar.minimized .list-unstyled.components {
+            padding: 10px;
+        }
+
+        #sidebar.minimized .list-unstyled.components li {
+            padding: 5px;
+            text-align: center; /* Center align text */
+        }
+
+        #sidebar.minimized .list-unstyled.components a span {
+            display: none; /* Hide the text in the minimized state */
+        }
+
+        #sidebar.minimized .list-unstyled.components a i {
+            margin-right: 5px;
+            font-size: 1.5rem; /* Increase the font size for icons when minimized */
+            margin-bottom: 5px; /* Add bottom padding to icons in minimized state */
+        }
+
+        /* Content adjustment for smaller screens */
         #content {
-            margin-left: 50px; /* Initial margin when not minimized */
-            transition: margin-left 0.3s;
-            padding: 15px;
+            margin-left: 250px; /* Adjust as needed */
+            transition: margin-left 0.3s; /* Smooth transition for margin-left changes */
         }
 
-        #content.minimized-content {
-            margin-left: 50px; /* Adjust as needed */
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            body {
+                margin-left: 0;
+            }
+
+            #sidebar {
+                width: 0;
+                display: none;
+            }
+
+            #content {
+                margin-left: 0;
+            }
         }

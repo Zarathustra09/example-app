@@ -74,5 +74,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\Admin::class,
         'editor' => \App\Http\Middleware\Editor::class,
         'member' => \App\Http\Middleware\Member::class,
+        'guest' => \App\Http\Middleware\UserRoleRedirect::class,
     ];
 }

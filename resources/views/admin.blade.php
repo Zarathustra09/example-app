@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+          
+            @include('layouts.sidebar')
 
-        
-            @extends("layouts\sidebar")
-           
-
+          
            <div id = "content">
             <div class="container">
                 <h2 class="my-4">Admin Dashboard</h2>
@@ -45,7 +44,7 @@
             </div>
     
             
-            <<script>
+            <script>
                 function approveUser(userId) {
                     // Make an AJAX request
                     $.ajax({
@@ -68,6 +67,24 @@
                     // Close the modal if you're using one
                     $('#userModal' + userId).modal('hide');
                 },
+                        error: function(error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                }
+
+                            function deleteUser(userId) {
+                    // Make an AJAX request to delete the user
+                    $.ajax({
+                        type: 'DELETE',
+                        url: '/admin/delete-user/' + userId,
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        success: function(response) {
+                            // Update the content of the table with the new data
+                            $('#approvalTableBody').html(response.table_body);
+                        },
                         error: function(error) {
                             console.error('Error:', error);
                         }
