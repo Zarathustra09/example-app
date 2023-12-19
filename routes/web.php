@@ -41,9 +41,17 @@ Auth::routes();
         Route::delete('/admin/delete-user/{userId}', [AdminController::class, 'deleteUser']);
 
         //members crud
-        Route::get('/admin/members-crud', [AdminController::class, 'showApprovedUsers'])->name('admin.members_crud.show');
-        // Route::delete('/admin/delete-member/{memberId}', [AdminController::class, 'deleteMember']);
-        // Route::put('/admin/update-member/{memberId}', [AdminController::class, 'updateMember']);
+      // Display all members
+                Route::get('/members', [MembersCrudController::class, 'getAllMembers'])->name('members.index');
+
+                // Display a specific member for editing
+                Route::get('/members/{id}', [MembersCrudController::class, 'getMember'])->name('members.show');
+
+                // Update a member
+                Route::put('/members/update/{id}', [MembersCrudController::class, 'updateMember'])->name('members.update');
+
+                // Delete a member
+                Route::delete('/members/delete/{id}', [MembersCrudController::class, 'deleteMember'])->name('members.delete');
     });
    
     Route::get('/profile}', [ProfileController::class, 'showProfile'])->name('profile.show');

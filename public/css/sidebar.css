@@ -26,6 +26,8 @@
    .sidebar li a{
     color: #fff;
    }
+
+
    
    @media(max-width: 767px){
     #side_nav{
