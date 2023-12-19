@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.sidebar')
+
 
     <div class="container mt-5" id = "content">
         <div class="row">
@@ -74,25 +74,17 @@
     <!-- Additional CSS for Profile Image and Background Design -->
     <style>
         .profile-img-container {
-            width: 200px;
-            height: 200px;
+            width: 100px;
+            height: 100px;
             overflow: hidden;
             border-radius: 50%;
             margin: 0 auto;
         }
 
-        .profile-img-border {
-            border: 4px solid #c5c5c5; /* Adjust the border color as needed */
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
         .profile-img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* This ensures the image covers the entire container */
         }
     </style>
 @endsection
