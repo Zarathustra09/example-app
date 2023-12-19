@@ -49,16 +49,12 @@ class AdminController extends Controller
         return response()->json(['table_body' => $tableBody]);
     }
 
-    public function deleteUser($userId)
+    public function showApprovedUsers()
     {
-        $user = User::find($userId);
+        $approvedUsers = User::where('approved', 1)->get();
 
-        if ($user) {
-            $user->delete();
-        }
-
-        $users = User::where('approved', 0)->get();
-
-        return response()->json(['table_body' => view('partials.approval-table', compact('users'))->render()]);
+        return view('sidebar_items.membersCrud', compact('approvedUsers'));
     }
+
+   
 }

@@ -2,12 +2,10 @@
 
 @section('content')
           
-            @include('layouts.sidebar')
-
-          
-           <div id = "content">
+        <body>
+         <div id = "content">
             <div class="container">
-                <h2 class="my-4">Admin Dashboard</h2>
+                <h3 class="my-4">Membership Approval</h3>
         
                 <form action="{{ route('admin.dashboard.show') }}" method="GET" class="mb-3">
                     <div class="input-group">
@@ -43,7 +41,7 @@
            
             </div>
     
-            
+        </body>
             <script>
                 function approveUser(userId) {
                     // Make an AJAX request

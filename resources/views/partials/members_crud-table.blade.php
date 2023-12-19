@@ -1,6 +1,4 @@
-
-
-@forelse ($users as $user)
+@forelse ($approvedUsers as $user)
     <tr>
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>
@@ -14,7 +12,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="userModalLabel{{ $user->id }}">Requirements for {{ $user->name }}</h5>
+                            <h5 class="modal-title" id="userModalLabel{{ $user->id }}">Details for {{ $user->name }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -34,8 +32,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-success" onclick="approveUser({{ $user->id }})" data-dismiss="modal">Approve</button>
-                            <button type="button" class="btn btn-warning" onclick="deleteUser({{ $user->id }})" data-dismiss="modal">Disapprove</button>
+                            <button type="button" class="btn btn-warning" onclick="disapproveUser({{ $user->id }})" data-dismiss="modal">Disapprove</button>
                         </div>
                     </div>
                 </div>
@@ -44,6 +41,6 @@
     </tr>
 @empty
     <tr>
-        <td colspan="3" class="text-center">No users found</td>
+        <td colspan="3" class="text-center">No approved users found</td>
     </tr>
 @endforelse

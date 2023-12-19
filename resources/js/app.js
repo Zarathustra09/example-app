@@ -39,11 +39,18 @@ app.component('example-component', ExampleComponent);
 app.mount('#app');
 
 
-
-$(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-        $('#content').toggleClass('active');
-        $('.item-dashboard, .item-analytics, .item-users, .item-membership, .item-profile, .item-logout').toggleClass('hidden');
-    });
+$(".sidebar ul li").on('click', function () {
+    $(".sidebar ul li.active").removeClass('active');
+    $(this).addClass('active');
 });
+
+$('.open-btn').on('click', function () {
+    $('.sidebar').addClass('active');
+
+});
+
+
+$('.close-btn').on('click', function () {
+    $('.sidebar').removeClass('active');
+
+})
