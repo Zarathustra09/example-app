@@ -55,7 +55,7 @@
                         <span class="bg-dark rounded-pill text-white py-0 px-2">02</span>
                     </a>
                 </li>
-                <li class=""><a href="{{ route('admin.members_crud.show') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user-plus">
+                <li class=""><a href="{{ route('members.index') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user-plus">
                     </i> Members</a></li>
     
                 <li class=""><a href="{{ route('profile.show') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user"></i>

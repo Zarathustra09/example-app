@@ -7,57 +7,54 @@ use App\Models\User;
 
 class MembersCrudController extends Controller
 {
-    public function deleteUser($userId)
-    {
-        $user = User::find($userId);
+   // Function to fetch all members for the table
+   public function getAllMembers()
+   {
+       $members = User::all(); // Change this query based on your actual data structure
 
-        if ($user) {
-            $user->delete();
-        }
+       return view('sidebar_items.membersCrud', ['members' => $members]);
+   }
 
-        $users = User::where('approved', 0)->get();
+   // Function to fetch a specific member for editing
+   public function getMember($id)
+   {
+       $member = User::find($id); // Change this query based on your actual data structure
 
-        return response()->json(['table_body' => view('partials.approval-table', compact('users'))->render()]);
-    }
+       return response()->json($member);
+   }
 
+   // Function to update a member
+   public function updateMember(Request $request, $id)
+   {
+       $member = User::find($id); // Change this query based on your actual data structure
 
-    public function deleteMember($memberId)
-    {
-        // Implement logic to delete the member
-        $member = User::find($memberId);
-        if ($member) {
-            $member->delete();
-        }
+       // Validate the request data
+       $request->validate([
+           'name' => 'required|string',
+           'email' => 'required|email',
+           // Add more validation rules as needed
+       ]);
 
-        // Get updated data for the table
-        $members = User::all(); // Update this query based on your needs
+       // Update the member with the validated data
+       $member->update($request->all());
 
-        // Render the table body and return as JSON
-        $tableBody = view('partials.members_crud-table', ['members' => $members])->render();
-        return response()->json(['table_body' => $tableBody]);
-    }
+       // Fetch all members to refresh the table
+       $members = User::all(); // Change this query based on your actual data structure
 
-    public function updateMember(Request $request, $memberId)
-    {
-        // Implement logic to update the member
-        $member = User::find($memberId);
-        if ($member) {
-            $member->update($request->all());
-        }
+       return response()->json(['table_body' => view('partials.members_crud-table', ['members' => $members])->render()]);
+   }
 
-        // Get updated data for the table
-        $members = User::all(); // Update this query based on your needs
+   // Function to delete a member
+   public function deleteMember($id)
+   {
+       $member = User::find($id); // Change this query based on your actual data structure
 
-        // Render the table body and return as JSON
-        $tableBody = view('partials.members_crud-table', ['members' => $members])->render();
-        return response()->json(['table_body' => $tableBody]);
-    }
+       // Delete the member
+       $member->delete();
 
-    public function showMembersCrud()
-    {
-        // Implement logic to fetch members data
-        $members = User::all(); // Update this query based on your needs
+       // Fetch all members to refresh the table
+       $members = User::all(); // Change this query based on your actual data structure
 
-        return view('sidebar_items.membersCrud', ['members' => $members]);
-    }
+       return response()->json(['table_body' => view('partials.members_crud-table', ['members' => $members])->render()]);
+   }
 }
