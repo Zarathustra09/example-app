@@ -34,7 +34,7 @@
         <header id="header" class="header fixed-top d-flex align-items-center">
           <div class="container d-flex align-items-center justify-content-between">
       
-            <a href="{{ url('/welcome.blade.php') }}" class="logo d-flex align-items-center me-auto me-lg-0">
+            <a href="{{ url('/') }}" class="logo d-flex align-items-center me-auto me-lg-0">
               <!-- Uncomment the line below if you also wish to use an image logo -->
               <!-- <img src="assets/img/logo.png" alt=""> -->
               <h1>Philippine Society for Quality<span>.</span></h1>
@@ -45,8 +45,8 @@
                 
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contact">Contact</a></li>
-                
                
       
             <a class="btn-book-a-table" href="{{ route('login') }}">Login</a>
@@ -203,6 +203,8 @@
     </section><!-- End Events Section --> --}}
 
        <!-- ======= Gallery Section ======= -->
+       <section id="gallery" class="gallery section-bg">
+        <div class="container" data-aos="fade-up">
           <div class="section-header">
             <h2>gallery</h2>
             <p>Check <span>Our Gallery</span></p>
@@ -374,7 +376,7 @@
   <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
   <script src="{{ asset('ssets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
   <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
-    <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
+  <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main.js')}}"></script> 

@@ -1,5 +1,6 @@
 <div class="content">
     <nav class="navbar navbar-expand-md navbar-light bg-light">
+        
         <div class="container-fluid">
             <div class="d-flex justify-content-between d-md-none d-block">
              <button class="btn px-1 py-0 open-btn me-2"><i class="fal fa-stream"></i></button>
