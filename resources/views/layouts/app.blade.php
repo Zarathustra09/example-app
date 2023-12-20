@@ -34,8 +34,6 @@
     
 </head>
 <body>
-
-   
     @if(auth()->check())
     <div class="main-container d-flex">
         <div class="sidebar" id="side_nav">
@@ -56,6 +54,7 @@
                     </a>
                 </li>
                 <li class=""><a href="{{ route('members.index') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user-plus">
+                <li class=""><a href="{{ route('admin.members_crud.show') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user-plus">
                     </i> Members</a></li>
     
                 <li class=""><a href="{{ route('profile.show') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user"></i>

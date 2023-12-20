@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\AdminController;
@@ -9,6 +11,9 @@ use App\Http\Controllers\MemberController;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MembersCrudController;
+
+use App\Http\Controllers\GalleryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +60,5 @@ Auth::routes();
     });
    
     Route::get('/profile}', [ProfileController::class, 'showProfile'])->name('profile.show');
-
-
-   
+    
+    Route::get('/gallery', [GalleryController::class, 'showGallery']);

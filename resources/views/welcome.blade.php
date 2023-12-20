@@ -19,12 +19,13 @@
         <!-- Vendor CSS Files -->
         <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-        {{-- <link href="{{ asset('assets/vendor/aos/aos.css" rel="stylesheet') }}"> --}}
+        <link href="{{ asset('assets/vendor/aos/aos.css" rel="stylesheet') }}">
         <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
-      
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
         
+ 
 
     </head>
     <body>
@@ -33,7 +34,7 @@
         <header id="header" class="header fixed-top d-flex align-items-center">
           <div class="container d-flex align-items-center justify-content-between">
       
-            <a href="{{ url('/welcome.blade.php') }}" class="logo d-flex align-items-center me-auto me-lg-0">
+            <a href="{{ url('/') }}" class="logo d-flex align-items-center me-auto me-lg-0">
               <!-- Uncomment the line below if you also wish to use an image logo -->
               <!-- <img src="assets/img/logo.png" alt=""> -->
               <h1>Philippine Society for Quality<span>.</span></h1>
@@ -44,8 +45,8 @@
                 
                 <li><a href="#hero">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contact">Contact</a></li>
-                
                
       
             <a class="btn-book-a-table" href="{{ route('login') }}">Login</a>
@@ -201,28 +202,30 @@
       </div>
     </section><!-- End Events Section --> --}}
 
-      <!-- ======= Gallery Section ======= -->
-      {{-- <section id="gallery" class="gallery section-bg">
+       <!-- ======= Gallery Section ======= -->
+       <section id="gallery" class="gallery section-bg">
         <div class="container" data-aos="fade-up">
-  
           <div class="section-header">
             <h2>gallery</h2>
             <p>Check <span>Our Gallery</span></p>
           </div>
-  
-          <div class="gallery-slider swiper">
+          {{-- @include('gallery') --}}
+          {{-- <div class="gallery-slider swiper">
             <div class="swiper-wrapper align-items-center">
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="img/background.png"><img src="/img/background.png" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="img/Bg.jpg"><img src="/img/Bg.jpg" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="img/Psq2.png"><img src="/img/Psq2.png" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="img/Psq3.png"><img src="/img/Psq3.png" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="img/Psq4.png"><img src="/img/Psq4.png" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="{{ asset('img/background.png') }}"><img src="{{ asset('/img/background.png') }}" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="{{ asset('img/Bg.jpg') }}"><img src="{{ asset('img/Bg.jpg') }}" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="{{ asset('img/Psq2.png') }}"><img src="{{ asset('/img/Psq2.png') }}" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="{{ asset('img/Psq3.png') }}"><img src="{{ asset('/img/Psq3.png') }}" class="img-fluid" alt=""></a></div>
+              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="{{ asset('img/Psq4.png') }}"><img src="{{ asset('/img/Psq4.png') }}" class="img-fluid" alt=""></a></div>
             </div>
             <div class="swiper-pagination"></div>
           </div>
   
-        </div>
-      </section><!-- End Gallery Section --> --}}
+        </div> --}}
+
+      </section>
+   
+      <!-- End Gallery Section --> 
 
        <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -361,6 +364,22 @@
 
   </footer><!-- End Footer -->
   <!-- End Footer -->
+  <a href="#" class="scroll-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
 
+  
+
+  <!-- Vendor JS Files -->
+  <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ asset('assets/vendor/aos/aos.js')}}"></script>
+  <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{ asset('ssets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
+  <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+  <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ asset('assets/js/main.js')}}"></script> 
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     </body>
 </html>
