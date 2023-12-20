@@ -4,7 +4,7 @@
         <td>{{ $member->email }}</td>
         <td>
             <button class="btn btn-primary" data-toggle="modal" data-target="#viewMemberModal{{ $member->id }}">
-                View Details
+                View
             </button>
 
             <!-- View Member Modal -->
