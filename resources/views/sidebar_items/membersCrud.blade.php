@@ -1,46 +1,59 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="table-responsive">
-<h3>Members CRUD Table</h3>
-
-    <form action="{{ route('members.index') }}" method="GET" class="mb-3">
-        <div class="input-group">
-            <input type="text" name="query" class="form-control" placeholder="Search members by name or email" value="{{ request('query') }}">
-            <div class="input-group-append">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </div>
+<body>
+    
+    <div id="content">
+        <div class="container">
+            <div class="table-responsive">
+                <h3>Members CRUD Table</h3>
+                
+                    <form action="{{ route('members.index') }}" method="GET" class="mb-3">
+                        <div class="input-group">
+                            <input type="text" name="query" class="form-control" placeholder="Search members by name or email" value="{{ request('query') }}">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                
+                
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Details</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="membersCrudTableBody">
+                        @include('partials.members_crud-table', ['members' => $members])
+                    </tbody>
+                </table>
+                
+                </body>
+                <!-- Pagination Links -->
+                @if ($members->total() > 10)
+                        <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                        {{ $members->links() }}
+                                </ul>
+                        </nav>
+                @endif
+                
+                
+                </div>
         </div>
-    </form>
+    </div>
+</body>
 
-
-<table class="table table-hover">
-    <thead class="thead-light">
-        <tr>
-            
-            <th>Name</th>
-            <th>Email</th>
-            <th>Details</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody id="membersCrudTableBody">
-        @include('partials.members_crud-table', ['members' => $members])
-    </tbody>
-</table>
-<!-- Pagination Links -->
-@if ($members->total() > 10)
-        <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
-                        {{ $members->links() }}
-                </ul>
-        </nav>
-@endif
-</div>
 
 @endsection
 <!-- Add scripts for CRUD operations -->
 <script>
+    
     // Function to edit a member
     function updateMember(memberId) {
     // Implement logic to gather data from the form
@@ -64,6 +77,9 @@
 
             // Close the edit modal
             $('#editMemberModal' + memberId).modal('hide');
+
+            // Update the table body with the new HTML content
+            $('#membersCrudTableBody').html(response.table_body);
         },
         error: function(error) {
             console.error('Error updating member:', error);
@@ -85,7 +101,7 @@ function deleteMember(memberId) {
             },
             success: function (response) {
                 // Update the content of the table with the new data
-                $('#membersTableBody').html(response.table_body);
+                $('#membersCrudTableBody').html(response.table_body);
             },
             error: function (error) {
                 console.error('Error:', error);
@@ -93,6 +109,7 @@ function deleteMember(memberId) {
         });
     }
 }
+
 
 
  

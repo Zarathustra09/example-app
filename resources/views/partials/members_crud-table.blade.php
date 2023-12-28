@@ -41,7 +41,7 @@
         </td>
         <td>
             <!-- Update and Delete Buttons -->
-            <button class="btn btn-warning" onclick="updateMember({{ $member->id }})" data-toggle="modal" data-target="#editMemberModal{{ $member->id }}">
+            <button class="btn btn-warning" data-toggle="modal" data-target="#editMemberModal{{ $member->id }}">
                 Edit
             </button>
             <button class="btn btn-danger" onclick="deleteMember({{ $member->id }})">
@@ -86,4 +86,6 @@
         <td colspan="4" class="text-center">No members found</td>
     </tr>
 @endforelse
+
+
 

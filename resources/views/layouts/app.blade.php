@@ -45,43 +45,43 @@
 
     
     @if(auth()->check())
-    <div class="main-container d-flex">
-        <div class="sidebar" id="side_nav">
-            <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
-                <h1 class="fs-4"><span class="bg-white text-dark rounded shadow px-2 me-2">PSQ</span> <span
-                        class="text-white">Philippine Society for Quality</span></h1>
-                <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i
-                        class="fas fa-stream"></i></button>
+        <div class="main-container d-flex">
+            <div class="sidebar" id="side_nav">
+                <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
+                    <h1 class="fs-4"><span class="bg-white text-dark rounded shadow px-2 me-2">PSQ</span> <span
+                            class="text-white">Philippine Society for Quality</span></h1>
+                    <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i
+                            class="fas fa-stream"></i></button>
+                </div>
+
+                <ul class="list-unstyled px-2">
+                    <li class="active"><a href="{{ route('admin.dashboard.show') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-house"></i></i> Dashboard</a></li>
+                    <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-users"></i></i>
+                            Roles</a></li>
+                    <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block d-flex justify-content-between">
+                            <span><i class="fa-solid fa-chart-simple"></i></i> Analytics</span>
+                            <span class="bg-dark rounded-pill text-white py-0 px-2">02</span>
+                        </a>
+                    </li>
+                    
+                    <li class=""><a href="{{ route('members.index') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user-plus">
+                        </i> Members</a></li>
+        
+                    <li class=""><a href="{{ route('profile.show') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user"></i>
+                            Profile</a></li>
+                </ul>
+                <hr class="h-color mx-2">
+
+                <ul class="list-unstyled px-2">
+                    <li class=""><a href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"   class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-right-from-bracket"></i>
+                            Logout</a></li>
+
+                    {{-- <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-bell"></i>
+                            Notifications</a></li> --}}
+
+                </ul>
+
             </div>
-
-            <ul class="list-unstyled px-2">
-                <li class="active"><a href="{{ route('admin.dashboard.show') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-house"></i></i> Dashboard</a></li>
-                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-users"></i></i>
-                        Roles</a></li>
-                <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block d-flex justify-content-between">
-                        <span><i class="fa-solid fa-chart-simple"></i></i> Analytics</span>
-                        <span class="bg-dark rounded-pill text-white py-0 px-2">02</span>
-                    </a>
-                </li>
-                
-                <li class=""><a href="{{ route('members.index') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user-plus">
-                    </i> Members</a></li>
-    
-                <li class=""><a href="{{ route('profile.show') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user"></i>
-                        Profile</a></li>
-            </ul>
-            <hr class="h-color mx-2">
-
-            <ul class="list-unstyled px-2">
-                <li class=""><a href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"   class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-right-from-bracket"></i>
-                        Logout</a></li>
-
-                {{-- <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fal fa-bell"></i>
-                        Notifications</a></li> --}}
-
-            </ul>
-
-        </div>
     @endif   
    
 
@@ -119,22 +119,21 @@
                                     </li>
                                
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-        
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
                                     </a>
-        
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
                         @endguest
 
                         </ul>

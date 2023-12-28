@@ -68,3 +68,4 @@ Auth::routes();
 
     
     Route::get('/gallery', [GalleryController::class, 'showGallery']);
+  
