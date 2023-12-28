@@ -8,9 +8,17 @@ use App\Models\User;
 class MembersCrudController extends Controller
 {
    // Function to fetch all members for the table
-   public function getAllMembers()
+   public function getAllMembers(Request $request)
    {
-       $members = User::all(); // Change this query based on your actual data structure
+       $query = $request->get('query');
+
+       $members = User::when($query, function ($queryBuilder) use ($query) {
+               $queryBuilder->where(function ($innerQuery) use ($query) {
+                   $innerQuery->where('name', 'like', '%' . $query . '%')
+                       ->orWhere('email', 'like', '%' . $query . '%');
+               });
+           })
+           ->paginate(10); // Change the number (10) based on your desired page size
 
        return view('sidebar_items.membersCrud', ['members' => $members]);
    }
@@ -57,4 +65,18 @@ class MembersCrudController extends Controller
 
        return response()->json(['table_body' => view('partials.members_crud-table', ['members' => $members])->render()]);
    }
+
+   public function searchMembers(Request $request)
+   {
+       $search = $request->input('search');
+
+       // Perform the search query
+       $members = User::where('name', 'LIKE', "%$search%")
+                     ->orWhere('email', 'LIKE', "%$search%")
+                     ->paginate(10);
+
+       return view('sidebar_items.membersCrud', ['members' => $members]);
+   }
+
+
 }

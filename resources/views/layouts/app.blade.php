@@ -15,8 +15,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="{{asset("css/sidebar.css")}}">
 
- <!-- fontawesome -->
- <script src="https://kit.fontawesome.com/cf3c10d8f2.js" crossorigin="anonymous"></script>
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/cf3c10d8f2.js" crossorigin="anonymous"></script>
+
+
+    <!-- Tab Icon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -34,6 +39,11 @@
     
 </head>
 <body>
+
+   
+
+
+    
     @if(auth()->check())
     <div class="main-container d-flex">
         <div class="sidebar" id="side_nav">
@@ -53,8 +63,8 @@
                         <span class="bg-dark rounded-pill text-white py-0 px-2">02</span>
                     </a>
                 </li>
+                
                 <li class=""><a href="{{ route('members.index') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user-plus">
-                <li class=""><a href="{{ route('admin.members_crud.show') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user-plus">
                     </i> Members</a></li>
     
                 <li class=""><a href="{{ route('profile.show') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-user"></i>
@@ -91,17 +101,23 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         <ul class="navbar-nav mb-2 mb-lg-0">
                             @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-        
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                                @if (Route::has('login'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    </li>
+                                @endif
+            
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                @endif
+
+                              
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
+                                    </li>
+                               
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -128,7 +144,6 @@
             </nav>
 
             <main class="py-4">
-
                 @yield('content')
             </main>
         </div>

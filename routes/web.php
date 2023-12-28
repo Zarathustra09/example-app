@@ -35,6 +35,7 @@ Auth::routes();
 
 
     Route::get('/home', [HomeController::class, 'index'])->name('index')->middleware('guest');
+  
    
     Route::get('/editor', [EditorController::class, 'index'])->name('editor')->middleware('editor');
     Route::get('/member', [MemberController::class, 'index'])->name('member')->middleware('member');
@@ -57,8 +58,13 @@ Auth::routes();
 
                 // Delete a member
                 Route::delete('/members/delete/{id}', [MembersCrudController::class, 'deleteMember'])->name('members.delete');
+
+                Route::get('/members/search', [MembersCrudController::class,'searchMembers'])->name('members.search');
     });
    
     Route::get('/profile}', [ProfileController::class, 'showProfile'])->name('profile.show');
+
+
+
     
     Route::get('/gallery', [GalleryController::class, 'showGallery']);
