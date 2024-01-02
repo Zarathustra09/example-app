@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Notifications\UserApprovedNotification;
 
 class AdminController extends Controller
 {
@@ -35,19 +36,23 @@ class AdminController extends Controller
     public function approveUser($userId)
     {
         $user = User::find($userId);
-
+        
         if ($user) {
             $user->approved = 1;
             $user->save();
         }
     
-        $users = User::where('approved', 0)->get();
+        $perPage = 10; // Set your desired number of items per page
+        $users = User::where('approved', 0)->paginate($perPage);
     
         // You can use the approval-table partial view to render the table body
         $tableBody = View::make('partials.approval-table', ['users' => $users])->render();
     
-        return response()->json(['table_body' => $tableBody]);
+        $user->notify(new UserApprovedNotification);
+    
+        return response()->json(['table_body' => $tableBody, 'pagination' => $users->links()]);
     }
+    
 
     public function showApprovedUsers()
     {

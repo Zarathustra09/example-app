@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+
 
 
 class DatabaseSeeder extends Seeder
@@ -25,7 +27,7 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => Carbon::now(),
                 'password' => Hash::make('Test@123'), // Use Hash::make to hash passwords
                 'approved' => 1,
-                'role' => 1,
+                'role' => 2,
                 'remember_token' => Str::random(10),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -33,6 +35,6 @@ class DatabaseSeeder extends Seeder
         }
 
         // Generate 14 random users
-        \App\Models\User::factory(14)->create(); // Adjust the namespace and model name as needed
+        \App\Models\User::factory(19)->create(); // Adjust the namespace and model name as needed
     }
 }
