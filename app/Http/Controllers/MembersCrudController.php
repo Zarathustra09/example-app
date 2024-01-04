@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\View;
+use Illuminate\Validation\Rule;
 
 class MembersCrudController extends Controller
 {
@@ -32,32 +33,34 @@ class MembersCrudController extends Controller
        return response()->json($member);
    }
 
- // Function to update a member
- public function updateMember(Request $request, $id)
- {
-     $member = User::find($id);
 
-     // Validate the request data
-     $request->validate([
-         'name' => 'required|string',
-         'email' => 'required|email',
-         // Add more validation rules as needed
-     ]);
+   
+   public function updateMember(Request $request, $id)
+    {
+        $member = User::find($id);
 
-     // Update the member with the validated data
-     $member->update($request->all());
+        // Validate the request data
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email',
+            // Add more validation rules as needed
+        ]);
 
-     $perPage = 10;
-     $members = User::paginate($perPage);
+        // Update the member with the validated data
+        $member->update($request->all());
 
-     // Render the updated row HTML
-     $updatedRowHtml = View::make('partials.members_crud-table', ['members' => $members])->render();
+        $perPage = 10;
+        $members = User::paginate($perPage);
 
-     // Render the pagination links separately
-     $pagination = $members->links()->toHtml();
+        // Render the updated row HTML
+        $updatedRowHtml = View::make('partials.members_crud-table', ['members' => $members])->render();
 
-     return response()->json(['updatedRowHtml' => $updatedRowHtml, 'pagination' => $pagination]);
- }
+        // Render the pagination links separately
+        $pagination = $members->links()->toHtml();
+
+        return response()->json(['updatedRowHtml' => $updatedRowHtml, 'pagination' => $pagination]);
+    }
+   
 
    // Function to delete a member
    public function deleteMember($id)

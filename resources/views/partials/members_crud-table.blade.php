@@ -50,7 +50,6 @@
         </td>
     </tr>
 
-    <!-- Edit Member Modal -->
     <div class="modal fade" id="editMemberModal{{ $member->id }}" tabindex="-1" role="dialog" aria-labelledby="editMemberModalLabel{{ $member->id }}" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -64,12 +63,12 @@
                     <!-- Add a form for editing member details -->
                     <form id="editMemberForm{{ $member->id }}">
                         <div class="form-group">
-                            <label for="editName">Name:</label>
-                            <input type="text" class="form-control" id="editName" name="editName" value="{{ $member->name }}">
+                            <label for="editName{{ $member->id }}">Name:</label>
+                            <input type="text" class="form-control" id="editName{{ $member->id }}" name="editName" value="{{ $member->name }}">
                         </div>
                         <div class="form-group">
-                            <label for="editEmail">Email:</label>
-                            <input type="email" class="form-control" id="editEmail" name="editEmail" value="{{ $member->email }}">
+                            <label for="editEmail{{ $member->id }}">Email:</label>
+                            <input type="email" class="form-control" id="editEmail{{ $member->id }}" name="editEmail" value="{{ $member->email }}">
                         </div>
                         <!-- Add more fields as needed -->
                     </form>

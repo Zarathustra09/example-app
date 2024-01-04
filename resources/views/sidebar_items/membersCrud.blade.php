@@ -53,11 +53,10 @@
 @endsection
 
 <script>
-    
-    function updateMember(memberId) {
+   function updateMember(memberId) {
     var formData = {
-        name: $('#editName').val(),
-        email: $('#editEmail').val(),
+        name: $('#editName' + memberId).val(),
+        email: $('#editEmail' + memberId).val(),
         // Add more fields as needed
     };
 
@@ -68,6 +67,7 @@
         type: 'PUT',
         url: '/members/update/' + memberId + '?page=' + currentPage,
         data: formData,
+        
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
         },
