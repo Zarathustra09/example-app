@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Notifications\UserApprovedNotification;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -39,6 +40,7 @@ class AdminController extends Controller
     
         if ($user) {
             $user->approved = 1;
+            $user->date_approved = Carbon::now();
             $user->save();
         }
     

@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'registration_form',
         'proof_of_payment',
+        'gender',
     ];
 
     /**

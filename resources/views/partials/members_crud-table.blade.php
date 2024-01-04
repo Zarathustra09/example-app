@@ -19,6 +19,17 @@
                         </div>
                         <div class="modal-body">
                             <p><strong>Date of Registration:</strong> {{ $member->created_at->format('F j, Y') }}</p>
+                            <p><strong>Date of Approval:</strong> 
+                                @if ($member->date_approved)
+                                    {{ is_string($member->date_approved) ? \Carbon\Carbon::parse($member->date_approved)->format('h:i a F j, Y') : $member->date_approved->format('h:i a F j, Y') }}
+                                @else
+                                    Not yet approved
+                                @endif
+                            </p>
+                            
+                            
+                            
+                            
                             @if ($member->registration_form)
                                 <img src="{{ asset('storage/' . $member->registration_form) }}" alt="Registration Form" class="img-fluid mb-3">
                             @else
@@ -70,6 +81,7 @@
                             <label for="editEmail{{ $member->id }}">Email:</label>
                             <input type="email" class="form-control" id="editEmail{{ $member->id }}" name="editEmail" value="{{ $member->email }}">
                         </div>
+                        
                         <!-- Add more fields as needed -->
                     </form>
                 </div>

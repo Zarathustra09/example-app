@@ -74,18 +74,23 @@
         success: function(response) {
             console.log('Member updated successfully:', response);
 
-            // Close the edit modal
-            $('#editMemberModal' + memberId).modal('hide');
+            // Check if the update was successful
+            if (!response.error) {
+                // Close the edit modal
+                $('#editMemberModal' + memberId).modal('hide');
 
-            // Update the table body with the new HTML content
-            $('#membersCrudTableBody').html(response.updatedRowHtml);
+                // Update the table body with the new HTML content
+                $('#membersCrudTableBody').html(response.updatedRowHtml);
 
-            // Update the pagination links
-            var paginationContainer = $('#paginationContainer');
-            if (paginationContainer.length) {
-                paginationContainer.html(response.pagination);
+                // Update the pagination links
+                var paginationContainer = $('#paginationContainer');
+                if (paginationContainer.length) {
+                    paginationContainer.html(response.pagination);
+                } else {
+                    console.error('Pagination container not found');
+                }
             } else {
-                console.error('Pagination container not found');
+                console.error('Error updating member:', response.error);
             }
         },
         error: function(error) {
@@ -93,6 +98,7 @@
         }
     });
 }
+
 
 
 function deleteMember(memberId) {

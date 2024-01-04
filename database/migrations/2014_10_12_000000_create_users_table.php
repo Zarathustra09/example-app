@@ -26,6 +26,8 @@ return new class extends Migration
             //images
             $table->string('registration_form')->nullable();
             $table->string('proof_of_payment')->nullable();
+
+            $table->timestamp('date_approved')->nullable();
     
             $table->rememberToken();
             $table->timestamps();
