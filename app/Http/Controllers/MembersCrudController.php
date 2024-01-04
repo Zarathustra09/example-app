@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\View;
 
 class MembersCrudController extends Controller
 {
@@ -31,40 +32,47 @@ class MembersCrudController extends Controller
        return response()->json($member);
    }
 
-   // Function to update a member
-   public function updateMember(Request $request, $id)
-   {
-       $member = User::find($id); // Change this query based on your actual data structure
+ // Function to update a member
+ public function updateMember(Request $request, $id)
+ {
+     $member = User::find($id);
 
-       // Validate the request data
-       $request->validate([
-           'name' => 'required|string',
-           'email' => 'required|email',
-           // Add more validation rules as needed
-       ]);
+     // Validate the request data
+     $request->validate([
+         'name' => 'required|string',
+         'email' => 'required|email',
+         // Add more validation rules as needed
+     ]);
 
-       // Update the member with the validated data
-       $member->update($request->all());
+     // Update the member with the validated data
+     $member->update($request->all());
 
-       // Fetch all members to refresh the table
-       $members = User::all(); // Change this query based on your actual data structure
+     $perPage = 10;
+     $members = User::paginate($perPage);
 
-       return response()->json(['table_body' => view('partials.members_crud-table', ['members' => $members])->render()]);
-   }
+     // Render the updated row HTML
+     $updatedRowHtml = View::make('partials.members_crud-table', ['members' => $members])->render();
+
+     // Render the pagination links separately
+     $pagination = $members->links()->toHtml();
+
+     return response()->json(['updatedRowHtml' => $updatedRowHtml, 'pagination' => $pagination]);
+ }
 
    // Function to delete a member
    public function deleteMember($id)
    {
        $member = User::find($id); // Change this query based on your actual data structure
-
+   
        // Delete the member
        $member->delete();
-
-       // Fetch all members to refresh the table
-       $members = User::all(); // Change this query based on your actual data structure
-
+   
+       // Fetch paginated members
+       $members = User::paginate(10); // Change the number based on your actual pagination limit
+   
        return response()->json(['table_body' => view('partials.members_crud-table', ['members' => $members])->render()]);
    }
+   
 
    public function searchMembers(Request $request)
    {

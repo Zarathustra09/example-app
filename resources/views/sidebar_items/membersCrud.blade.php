@@ -36,11 +36,11 @@
                 </body>
                 <!-- Pagination Links -->
                 @if ($members->total() > 10)
-                        <nav aria-label="Page navigation">
-                                <ul class="pagination justify-content-center">
-                                        {{ $members->links() }}
-                                </ul>
-                        </nav>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {{ $members->links() }}
+                    </ul>
+                </nav>
                 @endif
                 
                 
@@ -51,35 +51,42 @@
 
 
 @endsection
-<!-- Add scripts for CRUD operations -->
+
 <script>
     
-    // Function to edit a member
     function updateMember(memberId) {
-    // Implement logic to gather data from the form
     var formData = {
         name: $('#editName').val(),
         email: $('#editEmail').val(),
         // Add more fields as needed
     };
 
-    // Make an AJAX request to update the member
+    // Extract the current page from the pagination links
+    var currentPage = $('.pagination .active span').text();
+
     $.ajax({
         type: 'PUT',
-        url: '/members/update/' + memberId,
+        url: '/members/update/' + memberId + '?page=' + currentPage,
         data: formData,
         headers: {
             'X-CSRF-TOKEN': '{{ csrf_token() }}'
         },
         success: function(response) {
-            // Handle success
             console.log('Member updated successfully:', response);
 
             // Close the edit modal
             $('#editMemberModal' + memberId).modal('hide');
 
             // Update the table body with the new HTML content
-            $('#membersCrudTableBody').html(response.table_body);
+            $('#membersCrudTableBody').html(response.updatedRowHtml);
+
+            // Update the pagination links
+            var paginationContainer = $('#paginationContainer');
+            if (paginationContainer.length) {
+                paginationContainer.html(response.pagination);
+            } else {
+                console.error('Pagination container not found');
+            }
         },
         error: function(error) {
             console.error('Error updating member:', error);
@@ -88,14 +95,16 @@
 }
 
 
-
 function deleteMember(memberId) {
     // Show a confirmation dialog
     if (confirm('Are you sure you want to delete this member?')) {
+        // Extract the current page from the pagination links
+        var currentPage = $('.pagination .active span').text();
+
         // Make an AJAX request to delete the member
         $.ajax({
             type: 'DELETE',
-            url: '/members/delete/' + memberId, // Replace with your actual route
+            url: '/members/delete/' + memberId + '?page=' + currentPage,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
@@ -109,8 +118,6 @@ function deleteMember(memberId) {
         });
     }
 }
-
-
 
  
 </script>

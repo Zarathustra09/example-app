@@ -36,7 +36,7 @@ class AdminController extends Controller
     public function approveUser($userId)
     {
         $user = User::find($userId);
-        
+    
         if ($user) {
             $user->approved = 1;
             $user->save();
@@ -48,10 +48,14 @@ class AdminController extends Controller
         // You can use the approval-table partial view to render the table body
         $tableBody = View::make('partials.approval-table', ['users' => $users])->render();
     
+        // Render the pagination links separately
+        $pagination = $users->links()->toHtml();
+    
         $user->notify(new UserApprovedNotification);
     
-        return response()->json(['table_body' => $tableBody, 'pagination' => $users->links()]);
+        return response()->json(['table_body' => $tableBody, 'pagination' => $pagination]);
     }
+    
     
 
     public function showApprovedUsers()

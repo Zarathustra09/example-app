@@ -1,5 +1,5 @@
 @forelse ($members as $member)
-    <tr>
+    <tr data-member-id="{{ $member->id }}">
         <td>{{ $member->name }}</td>
         <td>{{ $member->email }}</td>
         <td>
@@ -20,16 +20,16 @@
                         <div class="modal-body">
                             <p><strong>Date of Registration:</strong> {{ $member->created_at->format('F j, Y') }}</p>
                             @if ($member->registration_form)
-                            <img src="{{ asset('storage/' . $member->registration_form) }}" alt="Registration Form" class="img-fluid mb-3">
-                             @else
-                            <p class="text-muted">No Registration Form</p>
-                             @endif
+                                <img src="{{ asset('storage/' . $member->registration_form) }}" alt="Registration Form" class="img-fluid mb-3">
+                            @else
+                                <p class="text-muted">No Registration Form</p>
+                            @endif
 
-                             @if ($member->proof_of_payment)
-                            <img src="{{ asset('storage/' . $member->proof_of_payment) }}" alt="Proof of Payment" class="img-fluid">
-                             @else
+                            @if ($member->proof_of_payment)
+                                <img src="{{ asset('storage/' . $member->proof_of_payment) }}" alt="Proof of Payment" class="img-fluid">
+                            @else
                                 <p class="text-muted">No Proof of Payment</p>
-                             @endif
+                            @endif
                             <!-- Add more details as needed -->
                         </div>
                         <div class="modal-footer">
@@ -86,6 +86,3 @@
         <td colspan="4" class="text-center">No members found</td>
     </tr>
 @endforelse
-
-
-

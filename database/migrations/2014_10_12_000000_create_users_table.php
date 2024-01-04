@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('approved')->default(0)->nullable();
             $table->integer('role')->default(0);
+
+            // Add gender field
+            $table->enum('gender', ['male', 'female', 'other'])->nullable();
             
             //images
             $table->string('registration_form')->nullable();

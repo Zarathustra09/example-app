@@ -44,33 +44,45 @@
                 </div>
             </body>
             <script>
-                function approveUser(userId) {
-                    // Make an AJAX request
-                    $.ajax({
-                        type: 'POST',
-                        url: '/admin/approve-user/' + userId,
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        success: function(response) {
-                    // Check if the container element exists
-                    var tableContainer = $('#approvalTableBody');
+        function approveUser(userId) {
+    // Extract the current page from the pagination links
+    var currentPage = $('.pagination .active span').text();
 
-                    if (tableContainer.length) {
-                        // Update the content of the table with the new data
-                        tableContainer.html(response.table_body);
-                    } else {
-                        console.error('Table container not found');
-                    }
+    // Make an AJAX request
+    $.ajax({
+        type: 'POST',
+        url: '/admin/approve-user/' + userId + '?page=' + currentPage,
+        headers: {
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        success: function(response) {
+            // Check if the container element exists
+            var tableContainer = $('#approvalTableBody');
 
-                    // Close the modal if you're using one
-                    $('#userModal' + userId).modal('hide');
-                },
-                        error: function(error) {
-                            console.error('Error:', error);
-                        }
-                    });
-                }
+            if (tableContainer.length) {
+                // Update the content of the table with the new data
+                tableContainer.html(response.table_body);
+            } else {
+                console.error('Table container not found');
+            }
+
+            // Update the pagination links
+            var paginationContainer = $('#paginationContainer');
+            if (paginationContainer.length) {
+                paginationContainer.html(response.pagination);
+            } else {
+                console.error('Pagination container not found');
+            }
+
+            // Close the modal if you're using one
+            $('#userModal' + userId).modal('hide');
+        },
+        error: function(error) {
+            console.error('Error:', error);
+        }
+    });
+}
+
 
                             function deleteUser(userId) {
                     // Make an AJAX request to delete the user

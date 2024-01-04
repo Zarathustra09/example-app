@@ -57,6 +57,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'registration_form' => ['required', 'file', 'mimes:pdf,jpg,png', 'max:2048'],
             'proof_of_payment' => ['required', 'file', 'mimes:pdf,jpg,png', 'max:2048'],
+            'gender' => ['nullable', 'in:male,female,other'],
         ]);
     }
 
@@ -70,20 +71,18 @@ class RegisterController extends Controller
      
     protected function create(array $data)
     {
-        
-
-
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'registration_form' => $data['registration_form']->store('registration_forms', 'public'),
-             'proof_of_payment' => $data['proof_of_payment']->store('proof_of_payments', 'public'),
+            'proof_of_payment' => $data['proof_of_payment']->store('proof_of_payments', 'public'),
+            'gender' => $data['gender'],
         ]);
 
         $administrators = User::where('role', '2')->get();
-        foreach ($administrators as $administrator){
-            $administrator-> notify(new AdminNewUserNotification($user));
+        foreach ($administrators as $administrator) {
+            $administrator->notify(new AdminNewUserNotification($user));
         }
 
         return $user;
