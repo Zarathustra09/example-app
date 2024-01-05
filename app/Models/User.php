@@ -24,6 +24,8 @@ class User extends Authenticatable
         'registration_form',
         'proof_of_payment',
         'gender',
+        'industry',
+        'nationality',
     ];
 
     /**

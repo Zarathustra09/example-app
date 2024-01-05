@@ -59,6 +59,50 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="industry" class="col-md-4 col-form-label text-md-end">{{ __('Industry') }}</label>
+                        
+                            <div class="col-md-6">
+                                <select id="industry" class="form-control @error('industry') is-invalid @enderror" name="industry">
+                                    <option value="" selected disabled>Select Industry</option>
+                                    @foreach(config('industries.options') as $value => $label)
+                                        <option value="{{ $value }}" {{ old('industry') == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
+                                </select>
+                        
+                                @error('industry')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        
+                        
+
+                        
+                        <div class="row mb-3">
+                            <label for="nationality" class="col-md-4 col-form-label text-md-end">{{ __('Nationality') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="nationality" class="form-control @error('nationality') is-invalid @enderror" name="nationality">
+                                    <option value="" selected disabled>Select Nationality</option>
+                                    @foreach(config('countries') as $code => $country)
+                                        <option value="{{ $code }}" {{ old('nationality') == $code ? 'selected' : '' }}>{{ $country }}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('nationality')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+
+                        
+
+                        <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

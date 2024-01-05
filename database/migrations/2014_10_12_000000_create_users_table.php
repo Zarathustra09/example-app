@@ -22,6 +22,9 @@ return new class extends Migration
 
             // Add gender field
             $table->enum('gender', ['male', 'female', 'other'])->nullable();
+            $table->string('industry')->nullable();
+            $table->string('nationality')->nullable();
+            
             
             //images
             $table->string('registration_form')->nullable();

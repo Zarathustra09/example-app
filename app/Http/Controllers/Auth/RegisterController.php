@@ -58,6 +58,8 @@ class RegisterController extends Controller
             'registration_form' => ['required', 'file', 'mimes:pdf,jpg,png', 'max:2048'],
             'proof_of_payment' => ['required', 'file', 'mimes:pdf,jpg,png', 'max:2048'],
             'gender' => ['nullable', 'in:male,female,other'],
+            'industry' => ['required', 'string'],
+            'nationality' => ['required', 'string'],
         ]);
     }
 
@@ -78,6 +80,8 @@ class RegisterController extends Controller
             'registration_form' => $data['registration_form']->store('registration_forms', 'public'),
             'proof_of_payment' => $data['proof_of_payment']->store('proof_of_payments', 'public'),
             'gender' => $data['gender'],
+            'industry' => $data['industry'],
+            'nationality' => $data['nationality'],
         ]);
 
         $administrators = User::where('role', '2')->get();

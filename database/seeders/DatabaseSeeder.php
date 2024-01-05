@@ -29,13 +29,20 @@ class DatabaseSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'gender' => 'male', // Add the gender field with a default value
+                'industry' => 'IT', // Add the industry field with a default value
+                'nationality' => $this->getRandomNationality(), // Add the nationality field with a default value
             ]);
         }
 
-        // Generate 19 random users with a gender field
-        \App\Models\User::factory(19)->create(['gender' => $this->getRandomGender()]);
+        // Generate 19 random users with gender, industry, and nationality fields
+        for ($i = 0; $i < 19; $i++) {
+            \App\Models\User::factory()->create([
+                'gender' => $this->getRandomGender(),
+                'industry' => $this->getRandomIndustry(),
+                'nationality' => $this->getRandomNationality(),
+            ]);
+        }
     }
-
     /**
      * Get a random gender for the user.
      *
@@ -45,5 +52,27 @@ class DatabaseSeeder extends Seeder
     {
         $genders = ['male', 'female', 'other'];
         return $genders[array_rand($genders)];
+    }
+
+    /**
+     * Get a random industry for the user.
+     *
+     * @return string
+     */
+    private function getRandomIndustry(): string
+    {
+        $industries = ['IT', 'Finance', 'Healthcare', 'Education', 'Manufacturing', 'Other'];
+        return $industries[array_rand($industries)];
+    }
+
+    /**
+     * Get a random nationality for the user.
+     *
+     * @return string
+     */
+    private function getRandomNationality(): string
+    {
+        $nationalities = array_keys(config('countries'));
+        return $nationalities[array_rand($nationalities)];
     }
 }
