@@ -43,7 +43,8 @@
                     </div>
                 </div>
             </body>
-            <script>
+ @endsection
+    <script>
         function approveUser(userId) {
     // Extract the current page from the pagination links
     var currentPage = $('.pagination .active span').text();
@@ -102,4 +103,3 @@
                     });
                 }
             </script>
-@endsection

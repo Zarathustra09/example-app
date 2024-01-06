@@ -14,6 +14,7 @@ use App\Http\Controllers\MembersCrudController;
 
 use App\Http\Controllers\GalleryController;
 
+use App\Http\Controllers\RegisterCorporate;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,10 +32,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-
-
     Route::get('/home', [HomeController::class, 'index'])->name('index')->middleware('guest');
+   
+
+
+    Route::get('/register/corporate', [RegisterCorporate::class, 'showRegistrationForm'])->name('view.corporate');
+    Route::post('/register/corporate', [RegisterCorporate::class, 'create'])->name('register.corporate');
+
+    
   
    
     Route::get('/editor', [EditorController::class, 'index'])->name('editor')->middleware('editor');
@@ -42,30 +47,28 @@ Auth::routes();
 
     Route::group(['middleware' => 'admin'], function () {
         //dashboard
+        Route::get('/adminDashboard', [AdminController::class, 'index'])->name('dashboard');
+
         Route::get('/admin', [AdminController::class, 'showAdminDashboard'])->name('admin.dashboard.show');
         Route::any('/admin/approve-user/{userId}', [AdminController::class, 'approveUser']);
         Route::delete('/admin/delete-user/{userId}', [AdminController::class, 'deleteUser']);
 
-        //members crud
-      // Display all members
-                Route::get('/members', [MembersCrudController::class, 'getAllMembers'])->name('members.index');
+        //Single Membership
+        Route::get('/members', [MembersCrudController::class, 'getAllMembers'])->name('members.index');
+        Route::get('/members/{id}', [MembersCrudController::class, 'getMember'])->name('members.show');
+        Route::put('/members/update/{id}', [MembersCrudController::class, 'updateMember'])->name('members.update');
+        Route::delete('/members/delete/{id}', [MembersCrudController::class, 'deleteMember'])->name('members.delete');
+        Route::get('/members/search', [MembersCrudController::class,'searchMembers'])->name('members.search');
 
-                // Display a specific member for editing
-                Route::get('/members/{id}', [MembersCrudController::class, 'getMember'])->name('members.show');
 
-                // Update a member
-                Route::put('/members/update/{id}', [MembersCrudController::class, 'updateMember'])->name('members.update');
-
-                // Delete a member
-                Route::delete('/members/delete/{id}', [MembersCrudController::class, 'deleteMember'])->name('members.delete');
-
-                Route::get('/members/search', [MembersCrudController::class,'searchMembers'])->name('members.search');
     });
    
     Route::get('/profile}', [ProfileController::class, 'showProfile'])->name('profile.show');
 
 
+    //Auth
 
+   
     
     Route::get('/gallery', [GalleryController::class, 'showGallery']);
   

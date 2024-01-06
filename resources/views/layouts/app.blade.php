@@ -56,7 +56,7 @@
 
                 <ul class="list-unstyled px-2">
                     <li class="active"><a href="{{ route('admin.dashboard.show') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-house"></i></i> Dashboard</a></li>
-                    <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-users"></i></i>
+                    <li class=""><a href="{{ route('dashboard') }}" class="text-decoration-none px-3 py-2 d-block"><i class="fa-solid fa-users"></i></i>
                             Roles</a></li>
                     <li class=""><a href="#" class="text-decoration-none px-3 py-2 d-block d-flex justify-content-between">
                             <span><i class="fa-solid fa-chart-simple"></i></i> Analytics</span>
@@ -115,7 +115,7 @@
 
                               
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
+                                        <a class="nav-link" href="{{ route('view.corporate') }}">{{ __('Corporate') }}</a>
                                     </li>
                                
                         @else

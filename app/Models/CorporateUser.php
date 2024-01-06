@@ -2,33 +2,35 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class CorporateUser extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
 
 
-
+    protected $table = 'corporate_users';
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'company_name',
         'email',
         'password',
         'registration_form',
         'proof_of_payment',
-        'gender',
         'industry',
-        'nationality',
-        'role',
+        'region',
+        'contact_number',
+        'fax_number',
+        'website',
+        'products_offered',
+        'no_employees',
+        
     ];
 
     /**
@@ -56,6 +58,5 @@ class User extends Authenticatable
     // }
 
     // public function hasRole($role) {
-    //     return $this->roles->contains('name', $role);
-    // }
+    //     return 
 }

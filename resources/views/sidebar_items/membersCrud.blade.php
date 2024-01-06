@@ -57,6 +57,7 @@
     var formData = {
         name: $('#editName' + memberId).val(),
         email: $('#editEmail' + memberId).val(),
+        role: $('#editRole' + memberId).val(),
         // Add more fields as needed
     };
 

@@ -4,47 +4,45 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateCorporateUsersTable extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('corporate_users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('company_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('approved')->default(0)->nullable();
             $table->integer('role')->default(0);
-
-            // Add gender field
-            $table->enum('gender', ['male', 'female', 'other'])->nullable();
             $table->string('industry')->nullable();
-            $table->string('nationality')->nullable();
-            
-            
-            //images
+            $table->string('region')->nullable();
+            $table->string('contact_number')->nullable();
+            $table->string('fax_number')->nullable();
+            $table->string('website')->nullable();
+            $table->string('products_offered')->nullable();
+            $table->integer('no_employees')->nullable();
             $table->string('registration_form')->nullable();
             $table->string('proof_of_payment')->nullable();
-
             $table->timestamp('date_approved')->nullable();
-    
             $table->rememberToken();
             $table->timestamps();
-
-
-
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('corporate_users');
     }
-};
+}
