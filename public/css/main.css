@@ -40,6 +40,8 @@
   a {
     color: var(--color-primary);
     text-decoration: none;
+    width: 100%;
+    height: 100%;
   }
   
   a:hover {
@@ -250,6 +252,11 @@
     z-index: 997;
     height: 90px;
     border-bottom: 1px solid #fff;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
   
   @media (max-width: 575px) {
@@ -264,8 +271,10 @@
   }
   
   .header .logo img {
-    max-height: 40px;
+    /* max-height: 40px; */
     margin-right: 6px;
+    /* max-width: 100%; */
+    height: auto;
   }
   
   .header .logo h1 {
@@ -307,18 +316,24 @@
   @media (min-width: 1280px) {
     .navbar {
       padding: 0;
+      width: 100%;
     }
   
     .navbar ul {
-      margin: 0;
-      padding: 0;
       display: flex;
       list-style: none;
       align-items: center;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100%;
     }
   
     .navbar li {
       position: relative;
+      float: left;
+      width: 100%;
     }
   
     .navbar>ul>li {
@@ -328,10 +343,9 @@
   
     .navbar a,
     .navbar a:focus {
-      display: flex;
+      display: block;
       align-items: center;
       justify-content: space-between;
-      padding: 0 3px;
       font-family: var(--font-secondary);
       font-size: 16px;
       font-weight: 600;
@@ -339,6 +353,10 @@
       white-space: nowrap;
       transition: 0.3s;
       position: relative;
+      float: left;
+      text-align: center;
+      padding: 14px 16px;
+      width: 100%;
     }
   
     .navbar a i,
@@ -449,7 +467,19 @@
       display: none;
     }
   }
+
+  @media (max-width: 600px) {
+    .navbar li .dropdown .dropdown ul{
+      float: left;
+      width: 100%;
+    }
   
+    .navbar a {
+      text-align: center;
+      display: block;
+      padding: 8px;
+    }
+  }
   /*--------------------------------------------------------------
   # Mobile Navigation
   --------------------------------------------------------------*/
@@ -472,14 +502,17 @@
       padding: 50px 0 10px 0;
       margin: 0;
       background: rgba(255, 255, 255, 0.9);
-      overflow-y: auto;
       transition: 0.3s;
       z-index: 9998;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
     }
   
     .navbar a,
     .navbar a:focus {
-      display: flex;
+      /* display: flex; */
       align-items: center;
       justify-content: space-between;
       padding: 10px 20px;
@@ -490,6 +523,11 @@
       color: #7f7f90;
       white-space: nowrap;
       transition: 0.3s;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
     }
   
     .navbar a i,
@@ -502,6 +540,7 @@
     .navbar a:hover,
     .navbar li:hover>a {
       color: #000;
+      float: left;
     }
   
     .navbar .active,
@@ -568,7 +607,9 @@
   # About Section
   --------------------------------------------------------------*/
   .about .about-img {
-    min-height: 500px;
+    /* min-height: 500px; */
+    max-width: 100%;
+    height: auto;
   }
   
   .about h3 {
@@ -895,6 +936,8 @@
   .menu .tab-content .menu-item .menu-img {
     padding: 0 60px;
     margin-bottom: 15px;
+    max-width: 100%;
+    height: auto;
   }
   
   .menu .tab-content .menu-item h4 {
@@ -1007,6 +1050,9 @@
   --------------------------------------------------------------*/
   .events .container-fluid {
     padding: 0;
+    width: 100%;
+    max-width: 1200px; /* Optional: set a maximum width for large screens */
+    margin: 0 auto;    /* Center the container */
   }
   
   .events .event-item {
@@ -1173,7 +1219,8 @@
   /*--------------------------------------------------------------
   # Gallery Section
   --------------------------------------------------------------*/
-  .gallery {
+    
+  /* .gallery { 
     overflow: hidden;
   }
   
@@ -1210,7 +1257,7 @@
       transform: scale(1.2);
     }
   }
-
+ */
 
   
   /*--------------------------------------------------------------
@@ -1356,6 +1403,14 @@
     100% {
       transform: rotate(360deg);
     }
+  }
+
+  .map-container iframe{
+    border: 0;
+    height: 450px;
+    width: 100%;
+    top: 0;
+    left: 0;
   }
   
   /*--------------------------------------------------------------

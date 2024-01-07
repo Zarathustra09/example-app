@@ -1,36 +1,34 @@
-<!-- resources/views/gallery.blade.php -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Slideshow Modal Gallery</title>
+</head>
+<body>
 
-@extends('layouts.app')
-
-@section('content')
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            @foreach($images as $image)
-                <div class="swiper-slide">
-                    <img src="{{ asset('img/' . $image) }}" alt="Image">
-                </div>
-            @endforeach
-        </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-        <!-- Add Navigation -->
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+  <!-- Slideshow Container -->
+  <div class="slideshow-container">
+    <div class="mySlides">
+      <img src="img/Psq2.png" alt="Slide 1">
+    </div>
+    <div class="mySlides">
+      <img src="img/Psq3.png" alt="Slide 2">
+    </div>
+    <div class="mySlides">
+      <img src="img/Psq4.png" alt="Slide 3">
     </div>
 
-    <!-- Initialize Swiper -->
-    <script>
-        var swiper = new Swiper('.swiper-container', {
-            slidesPerView: 1,
-            spaceBetween: 10,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-        });
-    </script>
-@endsection
+    <!-- Navigation buttons -->
+    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+  </div>
+
+  <!-- Modal Container -->
+  <div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+</body>
+</html>

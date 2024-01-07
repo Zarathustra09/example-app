@@ -14,18 +14,20 @@
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+        <link href="{{ asset('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Amatic+SC:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap')}}" rel="stylesheet">
       
         <!-- Vendor CSS Files -->
         <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-        <link href="{{ asset('assets/vendor/aos/aos.css" rel="stylesheet') }}">
+        <link href="{{ asset('assets/vendor/aos/aos.css" rel="stylesheet') }}" rel="stylesheet">
         <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
         <link href="{{ asset('css/main.css') }}" rel="stylesheet">
         
- 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+        <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+        
 
     </head>
     <body>
@@ -69,7 +71,7 @@
     <div class="container">
       <div class="row justify-content-between gy-5">
         <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-          <h2 data-aos="fade-up">Welcome PSQ Nations<br>Grow in Exelence with Us</h2>
+          <h2 data-aos="fade-up" data-aos-duration="1000">Welcome PSQ Nations<br>Grow in Exelence with Us</h2>
           <p data-aos="fade-up" data-aos-delay="100">Philippine Society for Quality * Since 1969</p>
           <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
           </div>
@@ -204,24 +206,12 @@
 
        <!-- ======= Gallery Section ======= -->
        <section id="gallery" class="gallery section-bg">
-        <div class="container" data-aos="fade-up">
+        {{-- <div class="container" data-aos="fade-up"> --}}
           <div class="section-header">
             <h2>gallery</h2>
             <p>Check <span>Our Gallery</span></p>
           </div>
-          {{-- @include('gallery') --}}
-          {{-- <div class="gallery-slider swiper">
-            <div class="swiper-wrapper align-items-center">
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="{{ asset('img/background.png') }}"><img src="{{ asset('/img/background.png') }}" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="{{ asset('img/Bg.jpg') }}"><img src="{{ asset('img/Bg.jpg') }}" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="{{ asset('img/Psq2.png') }}"><img src="{{ asset('/img/Psq2.png') }}" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="{{ asset('img/Psq3.png') }}"><img src="{{ asset('/img/Psq3.png') }}" class="img-fluid" alt=""></a></div>
-              <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery" href="{{ asset('img/Psq4.png') }}"><img src="{{ asset('/img/Psq4.png') }}" class="img-fluid" alt=""></a></div>
-            </div>
-            <div class="swiper-pagination"></div>
-          </div>
-  
-        </div> --}}
+          @include('gallery')
 
       </section>
    
@@ -236,8 +226,8 @@
           <p>Need Help? <span>Contact Us</span></p>
         </div>
 
-        <div class="mb-3">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.5871014409545!2d121.01058217494854!3d14.565588685916635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c9a0619db483%3A0x20ce88a02791d98d!2sPhilippine%20Society%20for%20Quality%20Inc!5e0!3m2!1sen!2sph!4v1699429758948!5m2!1sen!2sph" width="1300" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> 
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.5871014409545!2d121.01058217494854!3d14.565588685916635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c9a0619db483%3A0x20ce88a02791d98d!2sPhilippine%20Society%20for%20Quality%20Inc!5e0!3m2!1sen!2sph!4v1699429758948!5m2!1sen!2sph" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> 
           
         </div><!-- End Google Maps -->
 
@@ -368,6 +358,7 @@
     <i class="bi bi-arrow-up-short"></i>
   </a>
 
+  @include('preloader')
   
 
   <!-- Vendor JS Files -->
@@ -381,5 +372,57 @@
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main.js')}}"></script> 
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <script>
+    AOS.init({
+       duration: 1000, // Set the default duration to 1000 milliseconds (1 second)
+    });
+ </script>
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Hide the preloader when the page is fully loaded
+    document.getElementById('preloader').style.display = 'none';
+  });
+</script>
+ <script>
+  
+let slideIndex = 1;
+
+function showSlides(index) {
+  const slides = document.getElementsByClassName("mySlides");
+  const modalImage = document.getElementById("modalImage");
+
+  if (index < 1) {
+    slideIndex = slides.length;
+  } else if (index > slides.length) {
+    slideIndex = 1;
+  }
+
+  modalImage.src = slides[slideIndex - 1].getElementsByTagName("img")[0].src;
+}
+
+function openModal() {
+  document.getElementById("myModal").style.display = "block";
+  showSlides(slideIndex);
+}
+
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+}
+
+function changeSlide(n) {
+  showSlides((slideIndex += n));
+}
+
+// Show modal on image click
+const images = document.getElementsByClassName("mySlides");
+for (let i = 0; i < images.length; i++) {
+  images[i].addEventListener("click", function () {
+    slideIndex = i + 1;
+    openModal();
+  });
+}
+
+ </script>
     </body>
 </html>
