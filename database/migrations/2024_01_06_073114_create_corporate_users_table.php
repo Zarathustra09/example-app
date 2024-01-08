@@ -14,13 +14,19 @@ class CreateCorporateUsersTable extends Migration
     public function up()
     {
         Schema::create('corporate_users', function (Blueprint $table) {
+
+            //show
             $table->id();
             $table->string('company_name');
             $table->string('email')->unique();
+
+            //dont show
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('approved')->default(0)->nullable();
             $table->integer('role')->default(0);
+
+            //show
             $table->string('industry')->nullable();
             $table->string('region')->nullable();
             $table->string('contact_number')->nullable();
@@ -28,9 +34,13 @@ class CreateCorporateUsersTable extends Migration
             $table->string('website')->nullable();
             $table->string('products_offered')->nullable();
             $table->integer('no_employees')->nullable();
+
+
             $table->string('registration_form')->nullable();
             $table->string('proof_of_payment')->nullable();
-            $table->timestamp('date_approved')->nullable();
+            
+            $table->timestamp('membership_registration_date')->nullable();
+            $table->timestamp('membership_expiration_date')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

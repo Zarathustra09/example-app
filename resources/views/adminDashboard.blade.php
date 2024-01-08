@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container-fluid">
-    <h2 class="mb-5 text-white">Stats Card</h2>
+   
     <div class="header-body">
       <div class="row">
         <div class="col-xl-3 col-lg-6">
@@ -69,7 +69,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">New Users</h5>
+                  <h5 class="card-title text-uppercase text-muted mb-0">New Members</h5>
                   <span class="h2 font-weight-bold mb-0">{{ $newUsersCount }}</span>
                 </div>
                 <div class="col-auto">
@@ -98,7 +98,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Retention Rate</h5>
+                  <h5 class="card-title text-uppercase text-muted mb-0">New Organizations</h5>
                   <span class="h2 font-weight-bold mb-0">49,65%</span>
                 </div>
                 <div class="col-auto">
@@ -116,6 +116,12 @@
         </div>
       </div>
     </div>
+  </div>
+  
+
+  
+
+
 
 
 @endsection

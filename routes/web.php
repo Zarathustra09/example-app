@@ -46,6 +46,7 @@ Auth::routes();
     Route::get('/member', [MemberController::class, 'index'])->name('member')->middleware('member');
 
     Route::group(['middleware' => 'admin'], function () {
+
         //dashboard
         Route::get('/adminDashboard', [AdminController::class, 'index'])->name('dashboard');
 
@@ -60,10 +61,20 @@ Auth::routes();
         Route::delete('/members/delete/{id}', [MembersCrudController::class, 'deleteMember'])->name('members.delete');
         Route::get('/members/search', [MembersCrudController::class,'searchMembers'])->name('members.search');
 
+        //Corporate Membership Approval
+        Route::get('/corporate-admin-dashboard', [AdminController::class, 'showCorporateAdminDashboard'])->name('admin.corporateDashboard');
+        Route::post('/approve-corporate-user/{userId}', [AdminController::class, 'approveCorporateUser'])->name('admin.approveCorporateUser');
+        Route::get('/approved-corporate-users', [AdminController::class, 'showApprovedCorporateUsers'])->name('admin.showApprovedCorporateUsers');
+
+        Route::get('/members-corporate', [MembersCrudController::class, 'getAllCorporateMembers'])->name('corporate.index');
+        Route::put('/members-corporate/update/{id}', [MembersCrudController::class, 'updateCorporateMember'])->name('corporate.update');
+        Route::delete('/members-corporate/delete/{id}', [MembersCrudController::class, 'deleteCorporateMember'])->name('members.delete');
+
 
     });
    
     Route::get('/profile}', [ProfileController::class, 'showProfile'])->name('profile.show');
+   
 
 
     //Auth

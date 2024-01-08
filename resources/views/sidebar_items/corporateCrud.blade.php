@@ -8,7 +8,7 @@
             <div class="table-responsive">
                 <h3>Members CRUD Table</h3>
                 <div class="mb-3">
-                    <a href="{{ route('corporate.index') }}" class="btn btn-primary">Corporate Crud</a>
+                    <a href="{{ route('members.index') }}" class="btn btn-primary">Individual Crud</a>
                 </div>
                 
                     <form action="{{ route('members.index') }}" method="GET" class="mb-3">
@@ -32,7 +32,7 @@
                         </tr>
                     </thead>
                     <tbody id="membersCrudTableBody">
-                        @include('partials.members_crud-table', ['members' => $members])
+                        @include('partials.corporate_crud-table', ['members' => $members])
                     </tbody>
                 </table>
                 
@@ -56,9 +56,9 @@
 @endsection
 
 <script>
-   function updateMember(memberId) {
+   function updateCorporateMember(memberId) {
     var formData = {
-        name: $('#editName' + memberId).val(),
+        company_name: $('#editName' + memberId).val(),
         email: $('#editEmail' + memberId).val(),
         role: $('#editRole' + memberId).val(),
         // Add more fields as needed
@@ -69,7 +69,7 @@
 
     $.ajax({
         type: 'PUT',
-        url: '/members/update/' + memberId + '?page=' + currentPage,
+        url: '/members-corporate/update/' + memberId + '?page=' + currentPage,
         data: formData,
         
         headers: {
@@ -105,7 +105,7 @@
 
 
 
-function deleteMember(memberId) {
+function deleteCorporateMember(memberId) {
     // Show a confirmation dialog
     if (confirm('Are you sure you want to delete this member?')) {
         // Extract the current page from the pagination links
@@ -114,7 +114,7 @@ function deleteMember(memberId) {
         // Make an AJAX request to delete the member
         $.ajax({
             type: 'DELETE',
-            url: '/members/delete/' + memberId + '?page=' + currentPage,
+            url: '/members-corporate/delete/' + memberId + '?page=' + currentPage,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },

@@ -30,7 +30,8 @@ return new class extends Migration
             $table->string('registration_form')->nullable();
             $table->string('proof_of_payment')->nullable();
 
-            $table->timestamp('date_approved')->nullable();
+            $table->timestamp('membership_registration_date')->nullable();
+            $table->timestamp('membership_expiration_date')->nullable();
     
             $table->rememberToken();
             $table->timestamps();

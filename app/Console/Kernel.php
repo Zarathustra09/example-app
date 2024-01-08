@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        //  // Schedule the command to run daily at 9 AM
+        // $schedule->command('membership:send-expiration-emails')->dailyAt('09:00');
     }
 
     /**
@@ -21,6 +22,10 @@ class Kernel extends ConsoleKernel
     protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
+
+        // $this->commands([
+        //     \App\Console\Commands\SendMembershipExpirationEmails::class,
+        // ]);
 
         require base_path('routes/console.php');
     }

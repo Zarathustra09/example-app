@@ -1,6 +1,6 @@
 @forelse ($members as $member)
     <tr data-member-id="{{ $member->id }}">
-        <td>{{ $member->name }}</td>
+        <td>{{ $member->company_name }}</td>
         <td>{{ $member->email }}</td>
         <td>
             <button class="btn btn-primary" data-toggle="modal" data-target="#viewMemberModal{{ $member->id }}">
@@ -12,7 +12,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="viewMemberModalLabel{{ $member->id }}">Details for {{ $member->name }}</h5>
+                            <h5 class="modal-title" id="viewMemberModalLabel{{ $member->id }}">Details for {{ $member->company_name }}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -55,7 +55,7 @@
             <button class="btn btn-warning" data-toggle="modal" data-target="#editMemberModal{{ $member->id }}">
                 Edit
             </button>
-            <button class="btn btn-danger" onclick="deleteMember({{ $member->id }})">
+            <button class="btn btn-danger" onclick="deleteCorporateMember({{ $member->id }})">
                 Delete
             </button>
         </td>
@@ -65,7 +65,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editMemberModalLabel{{ $member->id }}">Edit Member - {{ $member->name }}</h5>
+                    <h5 class="modal-title" id="editMemberModalLabel{{ $member->id }}">Edit Member - {{ $member->company_name }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -75,7 +75,7 @@
                     <form id="editMemberForm{{ $member->id }}">
                         <div class="form-group">
                             <label for="editName{{ $member->id }}">Name:</label>
-                            <input type="text" class="form-control" id="editName{{ $member->id }}" name="editName" value="{{ $member->name }}">
+                            <input type="text" class="form-control" id="editName{{ $member->id }}" name="editName" value="{{ $member->company_name }}">
                         </div>
                         <div class="form-group">
                             <label for="editEmail{{ $member->id }}">Email:</label>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="updateMember({{ $member->id }})">Save Changes</button>
+                    <button type="button" class="btn btn-primary" onclick="updateCorporateMember({{ $member->id }})">Save Changes</button>
                 </div>
             </div>
         </div>

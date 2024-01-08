@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class CorporateUser extends Authenticatable
 {
+    use Notifiable;
 
 
     protected $table = 'corporate_users';

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\CorporateUsers;
+use App\Models\CorporateUser;
 use App\Notifications\UserApprovedNotification;
 use Carbon\Carbon;
 
@@ -33,16 +35,16 @@ class AdminController extends Controller
     {
         // Get approved users this month
         $thisMonth = now();
-        $approvedUsersThisMonth = User::whereNotNull('date_approved')
-            ->whereMonth('date_approved', $thisMonth->month)
-            ->whereYear('date_approved', $thisMonth->year)
+        $approvedUsersThisMonth = User::whereNotNull('membership_registration_date')
+            ->whereMonth('membership_registration_date', $thisMonth->month)
+            ->whereYear('membership_registration_date', $thisMonth->year)
             ->get();
 
         // Get approved users last month
         $lastMonth = now()->subMonth();
-        $approvedUsersLastMonth = User::whereNotNull('date_approved')
-            ->whereMonth('date_approved', $lastMonth->month)
-            ->whereYear('date_approved', $lastMonth->year)
+        $approvedUsersLastMonth = User::whereNotNull('membership_registration_date')
+            ->whereMonth('membership_registration_date', $lastMonth->month)
+            ->whereYear('membership_registration_date', $lastMonth->year)
             ->get();
 
         // Calculate the percentage change
@@ -66,9 +68,9 @@ class AdminController extends Controller
     {
         // Get approved users this month
         $thisMonth = now();
-        $approvedUsersThisMonth = User::whereNotNull('date_approved')
-            ->whereMonth('date_approved', $thisMonth->month)
-            ->whereYear('date_approved', $thisMonth->year)
+        $approvedUsersThisMonth = User::whereNotNull('membership_registration_date')
+            ->whereMonth('membership_registration_date', $thisMonth->month)
+            ->whereYear('membership_registration_date', $thisMonth->year)
             ->get();
 
         // Calculate monthly collection
@@ -77,8 +79,8 @@ class AdminController extends Controller
 
         // Calculate the percentage change since last week (considering a 7-day period)
         $lastWeek = now()->subWeek();
-        $approvedUsersLastWeek = User::whereNotNull('date_approved')
-            ->where('date_approved', '>', $lastWeek)
+        $approvedUsersLastWeek = User::whereNotNull('membership_registration_date')
+            ->where('membership_registration_date', '>', $lastWeek)
             ->get();
 
         $percentageChangeCollection = 0;
@@ -98,8 +100,8 @@ class AdminController extends Controller
     {
         // Get approved users this year
         $thisYear = now();
-        $approvedUsersThisYear = User::whereNotNull('date_approved')
-            ->whereYear('date_approved', $thisYear->year)
+        $approvedUsersThisYear = User::whereNotNull('membership_registration_date')
+            ->whereYear('membership_registration_date', $thisYear->year)
             ->get();
 
         // Calculate annual collection
@@ -108,9 +110,9 @@ class AdminController extends Controller
 
         // Calculate the percentage change since last month
         $lastMonth = now()->subMonth();
-        $approvedUsersLastMonth = User::whereNotNull('date_approved')
-            ->whereMonth('date_approved', $lastMonth->month)
-            ->whereYear('date_approved', $lastMonth->year)
+        $approvedUsersLastMonth = User::whereNotNull('membership_registration_date')
+            ->whereMonth('membership_registration_date', $lastMonth->month)
+            ->whereYear('membership_registration_date', $lastMonth->year)
             ->get();
 
         $percentageChangeAnnualCollection = 0;
@@ -147,7 +149,8 @@ class AdminController extends Controller
     
         if ($user) {
             $user->approved = 1;
-            $user->date_approved = Carbon::now();
+            $user->membership_registration_date = Carbon::now();
+            $user->membership_expiration_date = Carbon::now()->addYear();
             $user->save();
         }
     
@@ -173,6 +176,58 @@ class AdminController extends Controller
 
         return view('sidebar_items.membersCrud', compact('approvedUsers'));
     }
+
+
+    public function showCorporateAdminDashboard(Request $request)
+    {
+        $query = $request->get('query');
+
+        $corporateUsers = CorporateUser::where('approved', 0)
+            ->when($query, function ($queryBuilder) use ($query) {
+                $queryBuilder->where(function ($innerQuery) use ($query) {
+                    $innerQuery->where('company_name', 'like', '%' . $query . '%')
+                        ->orWhere('email', 'like', '%' . $query . '%');
+                });
+            })
+            ->paginate(10);
+
+        if ($request->ajax()) {
+            return view('partials.corporate_crud-table', compact('corporateUsers'))->render();
+        }
+
+        return view('corporateApproval', compact('corporateUsers'));
+    }
+
+    public function approveCorporateUser($userId)
+    {
+        $corporateUser = CorporateUser::find($userId);
+
+        if ($corporateUser) {
+            $corporateUser->approved = 1;
+            $corporateUser->membership_registration_date = Carbon::now();
+            $corporateUser->membership_expiration_date = Carbon::now()->addYear();
+            $corporateUser->save();
+        }
+
+        $perPage = 10;
+        $corporateUsers = CorporateUser::where('approved', 0)->paginate($perPage);
+
+        $tableBody = view('partials.corporate_approval-table', ['corporateUsers' => $corporateUsers])->render();
+
+        $pagination = $corporateUsers->links()->toHtml();
+
+        $corporateUser->notify(new UserApprovedNotification);
+
+        return response()->json(['table_body' => $tableBody, 'pagination' => $pagination]);
+    }
+
+    public function showApprovedCorporateUsers()
+    {
+        $approvedCorporateUsers = CorporateUser::where('approved', 1)->get();
+
+        return view('corporateApproval', compact('approvedCorporateUsers'));
+    }
+
 
    
 }
